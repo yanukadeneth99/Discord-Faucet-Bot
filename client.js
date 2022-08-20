@@ -1,8 +1,8 @@
 // Exporting the Client
 
-const { Client, Intents } = require("discord.js");
+const { Client, GatewayIntentBits } = require("discord.js");
 
 // Create a new Client with these permissions
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 module.exports = client;
