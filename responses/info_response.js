@@ -1,3 +1,4 @@
+// Replies with either user info or server info
 module.exports = async (interaction) => {
   if (interaction.options.getSubcommand() === "user") {
     const user = interaction.options.getUser("target");

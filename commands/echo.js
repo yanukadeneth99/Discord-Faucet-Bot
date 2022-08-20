@@ -1,11 +1,12 @@
 // Replying the User with what the user typed
 
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("echo")
     .setDescription("Replies with your input!")
+    .setDMPermission(true)
     .addStringOption((option) =>
       option
         .setName("input")
