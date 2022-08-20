@@ -3,7 +3,7 @@
 module.exports = {
   name: "interactionCreate",
   async execute(interaction) {
-    if (!interaction.isChatInputCommand()) return;
+    if (!interaction.isChatInputCommand()) return; // Drop if the input isn't a command
 
     if (interaction.commandName === "beep") {
       await require("../responses/beep_response")(interaction);
