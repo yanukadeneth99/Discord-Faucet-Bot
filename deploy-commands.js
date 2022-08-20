@@ -1,4 +1,4 @@
-//* Run `node deploy-commands.js` to set the commands
+//? Run `node deploy-commands.js` to set the commands
 
 const fs = require("node:fs");
 const path = require("node:path");

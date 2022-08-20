@@ -1,5 +1,3 @@
-//* Run node deploy-commands to register the commands added
-
 // Requires
 const fs = require("node:fs");
 const path = require("node:path");

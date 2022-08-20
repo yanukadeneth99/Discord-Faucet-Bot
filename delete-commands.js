@@ -1,4 +1,4 @@
-//* Run `node delete-commands.js` to delete all the commands
+//! Run `node delete-commands.js` to delete all the commands
 
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord.js");

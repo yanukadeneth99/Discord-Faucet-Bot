@@ -1,6 +1,6 @@
 // Replies user with user info or server info
 
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
