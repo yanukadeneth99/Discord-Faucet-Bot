@@ -14,10 +14,20 @@ module.exports = {
         .setName("network")
         .setDescription("Select the network to view balance")
         .setRequired(true)
-        .addChoices({
-          name: "Goerli",
-          value: "goerli",
-        })
+        .addChoices(
+          {
+            name: "Goerli",
+            value: "goerli",
+          },
+          {
+            name: "Rinkeby",
+            value: "rinkeby",
+          },
+          {
+            name: "Mumbai",
+            value: "mumbai",
+          }
+        )
     )
     .addStringOption((option) =>
       option
