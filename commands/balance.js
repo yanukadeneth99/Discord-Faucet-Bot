@@ -32,11 +32,11 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName("token")
-        .setDescription("Token Type to search")
+        .setDescription("External ERC20 tokens if applicable")
         .setRequired(false)
         .addChoices({
-          name: "ETH",
-          value: "eth",
+          name: "LINK",
+          value: "link",
         })
     ),
 };
