@@ -20,6 +20,8 @@ module.exports = {
         await require("../responses/feedback_response")(interaction);
       } else if (interaction.commandName === "balance") {
         await require("../responses/balance_response")(interaction);
+      } else if (interaction.commandName === "faucet") {
+        await require("../responses/faucet_response")(interaction);
       }
     }
     // Modal Commands
@@ -37,7 +39,7 @@ module.exports = {
         );
         // Reply the user
         await interaction.reply({
-          content: `Your feedback of ${subject} was received successfully!`,
+          content: `💁🏼‍♂️ Your feedback of ${subject} was received successfully!`,
           ephemeral: true,
         });
       }
@@ -45,7 +47,7 @@ module.exports = {
     // Final Reply if non exists
     else {
       await interaction.reply({
-        content: "This Command is either Deleted or Work in Progress!",
+        content: "👀 This Command is either Deleted or Work in Progress!",
         ephemeral: true,
       });
     }

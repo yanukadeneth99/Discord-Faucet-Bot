@@ -5,7 +5,7 @@ const getExternalBalance = require("../utils/getExternalBalance");
 const { stats, networks } = require("../config.json");
 
 module.exports = async (interaction) => {
-  await interaction.reply({ content: "Calculating....", fetchReply: true });
+  await interaction.reply({ content: "👩‍💻 Calculating....", fetchReply: true });
 
   let balance;
 
@@ -28,7 +28,7 @@ module.exports = async (interaction) => {
     } catch (error) {
       console.error(error);
       await interaction.editReply({
-        content: "Error Getting balance",
+        content: "🙉 Error Getting balance",
         ephemeral: true,
       });
     }
@@ -39,7 +39,7 @@ module.exports = async (interaction) => {
     } catch (error) {
       console.error(error);
       await interaction.editReply({
-        content: "Error Getting balance",
+        content: "🙉 Error Getting balance",
         ephemeral: true,
       });
     }
