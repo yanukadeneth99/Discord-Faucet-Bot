@@ -5,7 +5,7 @@ const getExternalBalance = require("../utils/getExternalBalance");
 const { stats, networks } = require("../config.json");
 
 module.exports = async (interaction) => {
-  await interaction.reply({ content: "Finding....", fetchReply: true });
+  await interaction.reply({ content: "Calculating....", fetchReply: true });
 
   let balance;
 
@@ -35,7 +35,7 @@ module.exports = async (interaction) => {
   } else {
     // Non native token (ERC 20 token)
     try {
-      balance = await getExternalBalance(provider, tokenName);
+      balance = await getExternalBalance(provider, tokenName, networkName);
     } catch (error) {
       console.error(error);
       await interaction.editReply({
@@ -52,7 +52,6 @@ module.exports = async (interaction) => {
 
   // Printing the value out
   await interaction.editReply({
-    content: `${networkName.toUpperCase()} BALANCE : **${balancefinal} ${tokenName.toUpperCase()}**`,
-    ephemeral: true,
+    content: `[${networkName.toUpperCase()}] [${balancefinal}] [${tokenName.toUpperCase()}]`,
   });
 };
