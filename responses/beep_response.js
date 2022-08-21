@@ -1,8 +1,5 @@
 // Reply beep with boop
 
-//  console.log(await interaction.fetchReply());
-//  await interaction.deleteReply();
-
 const wait = require("timers/promises").setTimeout;
 
 module.exports = async (interaction) => {

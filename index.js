@@ -1,23 +1,23 @@
-//* Run node deploy-commands to register the commands added
-
 // Requires
-const fs = require("fs");
+const fs = require("node:fs");
+const path = require("node:path");
 const { Collection } = require("discord.js");
 require("dotenv").config({ path: ".env" });
 const client = require("./client"); // Get Client
 
-// Get the Events
+// Run the Events depending on whether it's once or on.
+const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs
-  .readdirSync("./events")
+  .readdirSync(eventsPath)
   .filter((file) => file.endsWith(".js"));
 
-// Run the Events depending on whether it's once or on.
 for (const file of eventFiles) {
-  const event = require(`./events/${file}`);
+  const ePath = path.join(eventsPath, file);
+  const event = require(ePath);
   if (event.once) {
     client.once(event.name, (...args) => event.execute(...args));
   } else {
-    client.on(event.name, (...args) => event.execute(...args));
+    client.on(event.name, (...args) => event.execute(client, ...args));
   }
 }
 
@@ -25,13 +25,15 @@ for (const file of eventFiles) {
 client.commands = new Collection();
 
 // Gets all command files
+const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs
-  .readdirSync("./commands")
+  .readdirSync(commandsPath)
   .filter((file) => file.endsWith(".js"));
 
 // Setting the command for every file
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
+  const filePath = path.join(commandsPath, file);
+  const command = require(filePath);
   //Set a new item in the Collection
   // With the key as the command name and the value as the exported module
   client.commands.set(command.data.name, command);

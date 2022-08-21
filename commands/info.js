@@ -1,11 +1,12 @@
 // Replies user with user info or server info
 
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("info")
     .setDescription("Get info about a user or a server!")
+    .setDMPermission(false)
     .addSubcommand((subcommand) =>
       subcommand
         .setName("user")
@@ -15,8 +16,6 @@ module.exports = {
         )
     )
     .addSubcommand((subcommand) =>
-      subcommand
-      .setName("server")
-      .setDescription("Info about the server")
+      subcommand.setName("server").setDescription("Info about the server")
     ),
 };

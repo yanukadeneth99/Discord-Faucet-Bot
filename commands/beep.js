@@ -1,9 +1,10 @@
 // Respond user beep with Boop
 
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("beep")
-    .setDescription("Replies with boop!"),
+    .setDescription("Replies with boop!")
+    .setDMPermission(true),
 };
