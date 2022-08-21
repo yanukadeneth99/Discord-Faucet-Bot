@@ -1,0 +1,31 @@
+{
+  "bot": {
+    "clientId": "00000000000000",
+    "guildId": "00000000000000000000",
+    "token": "xxxxxxxxxxxxx"
+  },
+  "channels": {
+    "feedback": "0000000000000000",
+    "log": "000000000000000"
+  },
+  "roles": [
+    {
+      "name": "Admin",
+      "id": "000000000000000000"
+    }
+  ],
+  "networks": [
+    {
+      "name": "goerli",
+      "native-currency": "ETH",
+      "ALCHEMY_URL": "https://eth-goerli.g.alchemy.com/v2/xxxxxxxxxxxx",
+      "INFURA_URL": ""
+    }
+  ],
+  "tokens": [
+    {
+      "name": "eth",
+      "contract-address": ""
+    }
+  ]
+}

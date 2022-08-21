@@ -1,21 +1,22 @@
 // Returns the balance of the contract
 const ethers = require("ethers");
-require("dotenv").config({ path: "../.env" });
+const getProvider = require("../utils/getProvider");
+const { stats } = require("../config.json");
 
 module.exports = async (interaction) => {
   await interaction.reply({ content: "Finding....", fetchReply: true });
 
   // Get the Network from user input and the relevant provider
-  const network = interaction.options.getString("network");
-  const token = interaction.options.getString("token");
-  const provider = getProvider(network);
+  const networkName = interaction.options.getString("network");
+  // const token = interaction.options.getString("token");
+  const provider = getProvider(networkName);
 
   let balance;
 
   try {
     // Get the balance of the network core currency
     balance = await ethers.utils.formatEther(
-      await provider.getBalance(process.env.WALLET_ADDRESS)
+      await provider.getBalance(stats.walletAddress)
     );
   } catch (error) {
     console.error(error);
@@ -32,16 +33,7 @@ module.exports = async (interaction) => {
 
   // Printing the value out
   await interaction.editReply({
-    content: `Current Balance : ${balanceShort} ETH`,
+    content: `${networkName.toUpperCase()} Balance : ${balanceShort} ETH`,
     ephemeral: true,
   });
 };
-
-function getProvider(network) {
-  switch (network) {
-    case "goerli":
-      return new ethers.providers.JsonRpcProvider(
-        process.env.INFURA_GOERLI_URL ?? process.env.ALCHEMY_GOERLI_URL
-      );
-  }
-}

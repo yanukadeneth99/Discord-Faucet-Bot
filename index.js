@@ -2,7 +2,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { Collection } = require("discord.js");
-require("dotenv").config({ path: ".env" });
+const { bot } = require("./config.json");
 const client = require("./client"); // Get Client
 
 // Run the Events depending on whether it's once or on.
@@ -41,7 +41,7 @@ for (const file of commandFiles) {
 
 // Login to the Bot
 try {
-  client.login(process.env.DCB_TOKEN);
+  client.login(bot.token);
 } catch (error) {
   console.error(error);
 }

@@ -1,6 +1,7 @@
 // Get the balance of the Address only for admins
 
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+const { networks } = require("../config.json");
 
 module.exports = {
   data: new SlashCommandBuilder()
