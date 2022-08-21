@@ -17,6 +17,8 @@ module.exports = {
         await require("../responses/ping_response")(interaction);
       } else if (interaction.commandName === "feedback") {
         await require("../responses/feedback_response")(interaction);
+      } else if (interaction.commandName === "balance") {
+        await require("../responses/balance_response")(interaction);
       }
     }
     // Modal Commands

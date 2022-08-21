@@ -19,4 +19,8 @@ DCB_LOG_CHANNEL="000000000"
 DCB_ADMIN_ROLE_ID="00000000"
 # Discord Feedback Channel ID
 DCB_FEEDBACK_CHANNEL="00000000000"
+# Goerli Alchemy Key
+ALCHEMY_GOERLI_URL="https://eth-goerli.g.alchemy.com/v2/xxxxxxxxxxxxxxxxxxxx"
+# Own Wallet Address
+WALLET_ADDRESS="xxxxxxxxxxxxxxxxxxxxx"
 ```
