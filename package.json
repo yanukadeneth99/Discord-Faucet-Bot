@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "@discordjs/rest": "^1.0.1",
+    "alchemy-sdk": "^2.0.3",
     "axios": "^0.26.1",
     "discord-api-types": "^0.37.3",
     "discord.js": "^14.2.0",

@@ -5,6 +5,9 @@ const { Collection } = require("discord.js");
 const { bot } = require("./config.json");
 const client = require("./client"); // Get Client
 
+// BUG : Implement try catch everywhere
+// TODO : Remove Alchemy SDK if not required
+
 // Run the Events depending on whether it's once or on.
 const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs
