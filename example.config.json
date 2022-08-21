@@ -1,0 +1,40 @@
+{
+  "bot": {
+    "clientId": "00000000000000",
+    "guildId": "00000000000",
+    "token": "xxxxxxxxxxxxx"
+  },
+  "channels": {
+    "feedback": "00000000000",
+    "log": "00000000000"
+  },
+  "roles": {
+    "admin": {
+      "id": "000000000000000"
+    }
+  },
+  "networks": {
+    "goerli": {
+      "nativeCurrency": "eth",
+      "ALCHEMY_URL": "https://eth-goerli.g.alchemy.com/v2/xxxxxxxxxxx"
+    },
+    "rinkeby": {
+      "nativeCurrency": "eth",
+      "ALCHEMY_URL": "https://eth-rinkeby.alchemyapi.io/v2/xxxxxxxxxx"
+    },
+    "mumbai": {
+      "nativeCurrency": "matic",
+      "ALCHEMY_URL": "https://polygon-mumbai.g.alchemy.com/v2/xxxxxxxxxxxx"
+    }
+  },
+  "tokens": {
+    "link": {
+      "goerli": "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
+      "rinkeby": "0x01BE23585060835E02B77ef475b0Cc51aA1e0709",
+      "mumbai": "0x326C977E6efc84E512bB9C30f76E30c160eD06FB"
+    }
+  },
+  "stats": {
+    "walletAddress": "xxxxxx"
+  }
+}

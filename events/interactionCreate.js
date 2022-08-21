@@ -1,6 +1,7 @@
 // For all the Interactions
 
 const { InteractionType } = require("discord.js");
+const { channels } = require("../config.json");
 
 module.exports = {
   name: "interactionCreate",
@@ -25,9 +26,7 @@ module.exports = {
     else if (interaction.type === InteractionType.ModalSubmit) {
       if (interaction.customId === "feedbackModal") {
         // Get the Feedback Channel
-        const fdChannel = await client.channels.cache.get(
-          process.env.DCB_FEEDBACK_CHANNEL
-        );
+        const fdChannel = await client.channels.cache.get(channels.feedback);
         // Get the value of the sent messages and send on the feedback channel
         const subject = interaction.fields.getTextInputValue("subject");
         const description = interaction.fields.getTextInputValue("description");

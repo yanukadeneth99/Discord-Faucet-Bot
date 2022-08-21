@@ -1,6 +1,6 @@
 // When the Bot Launches
 
-require("dotenv").config({ path: "../.env" });
+const { channels } = require("../config.json");
 
 module.exports = {
   name: "ready",
@@ -8,9 +8,7 @@ module.exports = {
   async execute(client) {
     console.log(`Ready! Logged in as ${client.user.tag}`);
 
-    const logchannel = await client.channels.cache.get(
-      process.env.DCB_LOG_CHANNEL
-    );
+    const logchannel = await client.channels.cache.get(channels.log);
     // logchannel.send(
     //   `[LOGIN] | ${new Date(
     //     Date.now()

@@ -2,17 +2,17 @@
 
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord.js");
-require("dotenv").config();
+const { bot } = require("./config.json");
 
 // Get the REST
-const rest = new REST({ version: "10" }).setToken(process.env.DCB_TOKEN);
+const rest = new REST({ version: "10" }).setToken(bot.token);
 
 //* Use to remove all commands from the Guild
 // rest
 //   .put(
 //     Routes.applicationGuildCommands(
-//       process.env.DCB_CLIENT_ID,
-//       process.env.DCB_GUILD_ID
+//       bot.clientId,
+//       bot.guildId
 //     ),
 //     { body: [] }
 //   )
@@ -21,6 +21,6 @@ const rest = new REST({ version: "10" }).setToken(process.env.DCB_TOKEN);
 
 //* Use to remove all commands publically
 rest
-  .put(Routes.applicationCommands(process.env.DCB_CLIENT_ID), { body: [] })
+  .put(Routes.applicationCommands(bot.clientId), { body: [] })
   .then(() => console.log("Successfully deleted all application commands."))
   .catch(console.error);

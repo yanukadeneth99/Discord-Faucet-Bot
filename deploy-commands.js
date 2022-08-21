@@ -4,7 +4,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord.js");
-require("dotenv").config();
+const { bot } = require("./config.json");
 
 // Get the commands from the `/commands` folder and to the array
 const commands = [];
@@ -20,23 +20,19 @@ for (const file of commandFiles) {
 }
 
 // Get the REST
-const rest = new REST({ version: "10" }).setToken(process.env.DCB_TOKEN);
+const rest = new REST({ version: "10" }).setToken(bot.token);
 
 //* Use for Development (Updates only the passed guild data)
 rest
-  .put(
-    Routes.applicationGuildCommands(
-      process.env.DCB_CLIENT_ID,
-      process.env.DCB_GUILD_ID
-    ),
-    { body: commands }
-  )
+  .put(Routes.applicationGuildCommands(bot.clientId, bot.guildId), {
+    body: commands,
+  })
   .then(() => console.log("Successfully registered application commands"))
   .catch(console.error);
 
 //* Use for Production as it updates the commands public
 // rest
-//   .put(Routes.applicationCommands(process.env.DCB_CLIENT_ID), {
+//   .put(Routes.applicationCommands(bot.clientId), {
 //     body: commands,
 //   })
 //   .then(() => console.log("Successfully registered application commands"))
