@@ -1,11 +1,15 @@
-// Generate a Modal where you can enter your required eth
-// Address, Token(LINK, ETH, MATIC), Network(Mumbai,Rinkeby)
+/* 
+Users can pass feedback which will be printed in a feedback discord channel.
+Rate limited
+*/
 
 const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("feedback")
-    .setDescription("Send Feedback to the Faucet Bot")
-    .setDMPermission(true),
+    .setDescription(
+      "Send Feedback regarding the Faucet Bot. Your discord username will be recorded."
+    )
+    .setDMPermission(false),
 };

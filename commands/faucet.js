@@ -1,13 +1,14 @@
-// Users can request for currency
-//TODO : Apply Rate Limiting
-//TODO : Make sure only verified members can do this (or any other role)
+/* 
+Users can use to claim free eth daily per account from the passed network and token
+* Change this if you add more networks/tokens and deploy the commands again using `node deploy-commands`
+*/
 
 const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("faucet")
-    .setDescription("Claim free eth for your work")
+    .setDescription("Claim daily ETH from the faucet")
     .setDMPermission(false)
     .addStringOption((option) =>
       option
@@ -38,7 +39,7 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName("token")
-        .setDescription("External ERC20 tokens if applicable")
+        .setDescription("Select the token if applicable")
         .setRequired(false)
         .addChoices({
           name: "LINK",

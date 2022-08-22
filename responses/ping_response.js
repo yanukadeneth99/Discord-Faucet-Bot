@@ -13,8 +13,18 @@ module.exports = async (interaction) => {
       }ms | 🩸 Websocket heartbeat: ${interaction.client.ws.ping}ms.`
     );
   } catch (error) {
-    console.error(`Error [RESPONCE - PING] : ${error}`);
-    await interaction.reply("🙇‍♂️ Error, please try again later");
-    // throw new Error(error);
+    console.error(`Error Getting Ping Response : ${error}`);
+    const logchannel = await interaction.client.channels.cache.get(
+      channels.log
+    );
+    logchannel.send(
+      `[ERROR]\n${new Date(
+        Date.now()
+      ).toUTCString()}\nGetting Ping Response\n${error}`
+    );
+    await interaction.editReply({
+      content: "🙇‍♂️ Error, please try again later",
+      ephemeral: true,
+    });
   }
 };

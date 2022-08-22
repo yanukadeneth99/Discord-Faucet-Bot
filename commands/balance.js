@@ -1,17 +1,23 @@
-// Get the balance of the Address only for admins
+/* 
+Get the Faucet Address balance of the Passed Network and token. If the token is not passed then the default native-currency is used
+ADMINS ONLY
+* Change this if you add more networks/tokens and deploy the commands again using `node deploy-commands`
+*/
 
 const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("balance")
-    .setDescription("Get the balance remaining of the contract")
-    .setDMPermission(true)
+    .setDescription(
+      "Get the balance remaining of the Faucet depending on the passed network and token"
+    )
+    .setDMPermission(false)
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addStringOption((option) =>
       option
         .setName("network")
-        .setDescription("Select the network to view balance")
+        .setDescription("Select the network")
         .setRequired(true)
         .addChoices(
           {
@@ -31,7 +37,7 @@ module.exports = {
     .addStringOption((option) =>
       option
         .setName("token")
-        .setDescription("External ERC20 tokens if applicable")
+        .setDescription("Select the token if applicable")
         .setRequired(false)
         .addChoices({
           name: "LINK",

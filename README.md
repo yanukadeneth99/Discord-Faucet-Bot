@@ -8,7 +8,7 @@ Change the `example.config.json` into `config.json`, and fill in the required fi
 
 ## Installation
 
-1. If you do not have pnpm, run `npm i -g pnpm`
+1. If you do not have pnpm, run `npm i -g pnpm`, also install nodemon if you haven't `npm i -g nodemon`
 2. Install Dependancies using `pnpm install`
 3. Fill in the config and run the bot : `pnpm dev_local`
 

@@ -1,4 +1,4 @@
-// Feedback Responses
+// Responds the user by building a Form
 //TODO : Rate Limit Feedbacks
 const {
   ActionRowBuilder,
@@ -6,6 +6,7 @@ const {
   TextInputBuilder,
   TextInputStyle,
 } = require("discord.js");
+const { channels } = require("../config.json");
 
 module.exports = async (interaction) => {
   try {
@@ -25,7 +26,7 @@ module.exports = async (interaction) => {
     // Long Description of the feedback
     const description = new TextInputBuilder()
       .setCustomId("description")
-      .setLabel("Describe the Feedback")
+      .setLabel("Describe your feedback")
       .setStyle(TextInputStyle.Paragraph)
       .setRequired(true);
 
@@ -40,8 +41,15 @@ module.exports = async (interaction) => {
     // Show the modal to the user
     await interaction.showModal(modal);
   } catch (error) {
-    console.error(`Error [RESPONCE - FEEDBACK] : ${error}`);
-    await interaction.reply("🙇‍♂️ Error, please try again later");
-    // throw new Error(error);
+    console.error(`Error Creating Feedback Modal : ${error}`);
+    const logchannel = await interaction.client.channels.cache.get(
+      channels.log
+    );
+    logchannel.send(
+      `[ERROR]\n${new Date(
+        Date.now()
+      ).toUTCString()}\nBuilding Feedback Modal\n${error}`
+    );
+    throw new Error(error);
   }
 };

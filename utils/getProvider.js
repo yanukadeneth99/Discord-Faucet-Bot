@@ -8,9 +8,6 @@ module.exports = (networkName) => {
 
     url ?? Error("Network not found");
 
-    //// Running on public RPC
-    // return ethers.getDefaultProvider(networkName);
-
     return new ethers.providers.JsonRpcProvider(url);
   } catch (error) {
     console.error(`Error getting provider at getProvider : ${error}`);

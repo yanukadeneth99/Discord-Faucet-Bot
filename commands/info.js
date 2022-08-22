@@ -1,16 +1,20 @@
-// Replies user with user info or server info
+/* 
+Replies the user with user information or server information
+ADMINS ONLY
+*/
 
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("info")
-    .setDescription("Get info about a user or a server!")
+    .setDescription("Get info about a user or the server")
     .setDMPermission(false)
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addSubcommand((subcommand) =>
       subcommand
         .setName("user")
-        .setDescription("Info about a user")
+        .setDescription("Select the user")
         .addUserOption((option) =>
           option.setName("target").setDescription("The user")
         )

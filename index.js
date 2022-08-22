@@ -1,11 +1,11 @@
-// Requires
+// Starting Point of the project : run `node .`
 const fs = require("node:fs");
 const path = require("node:path");
 const { Collection } = require("discord.js");
 const { bot } = require("./config.json");
 const client = require("./client"); // Get Client
 
-// Run the Events depending on whether it's once or on.
+// Run the Events
 try {
   const eventsPath = path.join(__dirname, "events");
   const eventFiles = fs
@@ -46,7 +46,7 @@ try {
   throw new Error(error);
 }
 
-// Login to the Bot
+// Login to Bot with token
 try {
   client.login(bot.token);
 } catch (error) {
