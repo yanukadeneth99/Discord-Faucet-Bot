@@ -79,10 +79,10 @@ module.exports = async (interaction) => {
         erc20ABI,
         wallet
       );
-      // TODO : Check decimals for each erc20 token and transfer (`ethers.utils.parseEther(amountToSend, decimals)`)
+      const decimals = await contract.decimals();
       const tx = await contract.transfer(
         usrAddress,
-        ethers.utils.parseEther(stats.dailyEth.toString())
+        ethers.utils.parseEther(stats.dailyEth.toString(), decimals)
       );
       await tx.wait();
       await interaction.editReply("💁 Transfer Successful, Happy Coding!");
