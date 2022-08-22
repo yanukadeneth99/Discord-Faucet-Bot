@@ -1,8 +1,10 @@
 // Handles Faucet Transfers
 const ethers = require("ethers");
 const getProvider = require("../utils/getProvider");
-// const getExternalBalance = require("../utils/getExternalBalance");
-const { stats, networks } = require("../config.json");
+const getExternalBalance = require("../utils/getExternalBalance");
+const getBalance = require("../utils/getBalance");
+const erc20ABI = require("../libs/erc20.json");
+const { stats, networks, tokens } = require("../config.json");
 
 // TODO : Handle the errors and implement validation
 // TODO : Handle when passed token
@@ -17,24 +19,76 @@ module.exports = async (interaction) => {
       interaction.options.getString("token") ??
       networks[networkName].nativeCurrency;
 
+    // Check whether address is valid
+    if (!ethers.utils.isAddress(usrAddress)) {
+      await interaction.editReply("😤 Please enter a correct address");
+      return;
+    }
+
     // Get the Provider based on the network
     const provider = getProvider(networkName);
 
-    // Create a wallet instance
-    const wallet = new ethers.Wallet(stats.walletPrivateKey, provider);
+    // Native Transfer (No Token or Native Currency)
+    if (tokenName == networks[networkName].nativeCurrency) {
+      // If the balance is too low (curBalance is in a float)
+      const curBalance = await getBalance(provider);
+      if (curBalance < stats.dailyEth) {
+        await interaction.editReply(
+          `😥 Insufficient funds, please donate to : ${stats.walletAddress}`
+        );
+        return;
+      }
 
-    const tx = {
-      to: "0x5D8f50B286911F37CE077c40EF10A76E7a6f0B39",
-      value: ethers.utils.parseEther("1.0"),
-    };
+      // Create a wallet instance
+      const wallet = new ethers.Wallet(stats.walletPrivateKey, provider);
 
-    // Transaction
-    const tx2 = await wallet.sendTransaction(tx);
-    await tx2.wait();
-    await interaction.editReply("💁 Transfer Successful, Happy Coding!");
+      const txObj = {
+        to: usrAddress,
+        value: ethers.utils.parseEther("1.0"),
+      };
+
+      // Transaction
+      const tx = await wallet.sendTransaction(txObj);
+      await tx.wait();
+      await interaction.editReply("💁 Transfer Successful, Happy Coding!");
+    }
+    // Non Native Transfer (ERC-20)
+    else {
+      // If the balance is too low (curBalance is in a float)
+      const curBalance = await getExternalBalance(
+        provider,
+        tokenName,
+        networkName
+      );
+      if (curBalance < stats.dailyEth) {
+        await interaction.editReply(
+          `😥 Insufficient funds, please donate ${tokenName.toUpperCase()} to : ${
+            stats.walletAddress
+          }`
+        );
+        return;
+      }
+
+      // Create a wallet instance
+      const wallet = new ethers.Wallet(stats.walletPrivateKey, provider);
+
+      // Create contract
+      const contract = new ethers.Contract(
+        tokens[tokenName][networkName],
+        erc20ABI,
+        wallet
+      );
+      // TODO : Check decimals for each erc20 token and transfer (`ethers.utils.parseEther(amountToSend, decimals)`)
+      const tx = await contract.transfer(
+        usrAddress,
+        ethers.utils.parseEther(stats.dailyEth.toString())
+      );
+      await tx.wait();
+      await interaction.editReply("💁 Transfer Successful, Happy Coding!");
+    }
   } catch (error) {
     console.error(`Error [RESPONCE - FAUCET] : ${error}`);
-    await interaction.reply("🙇‍♂️ Error, please try again later");
+    await interaction.editReply("🙇‍♂️ Error, please try again later");
     // throw new Error(error);
   }
 };

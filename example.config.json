@@ -37,6 +37,7 @@
   "stats": {
     "walletAddress": "xxxx",
     "ALCHEMY_KEY": "xxxxx",
-    "walletPrivateKey": "xxxx"
+    "walletPrivateKey": "xxxx",
+    "dailyEth": 1
   }
 }

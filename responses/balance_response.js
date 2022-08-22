@@ -1,6 +1,7 @@
 // Returns the balance of the contract
 const ethers = require("ethers");
 const getProvider = require("../utils/getProvider");
+const getBalance = require("../utils/getBalance");
 const getExternalBalance = require("../utils/getExternalBalance");
 const { stats, networks } = require("../config.json");
 
@@ -26,9 +27,7 @@ module.exports = async (interaction) => {
       // Token not passed or native Currency (No ERC20 tokens)
       try {
         // Get the balance of the network core currency
-        balance = await ethers.utils.formatEther(
-          await provider.getBalance(stats.walletAddress)
-        );
+        balance = await getBalance(provider);
       } catch (error) {
         console.error(error);
         await interaction.editReply({
