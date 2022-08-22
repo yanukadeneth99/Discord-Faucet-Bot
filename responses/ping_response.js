@@ -1,12 +1,15 @@
 // Responds user with the ping of the bot
 
-module.exports = async (interaction) => {
-  try {
-    const sent = await interaction.reply({
-      content: "✈️ Pinging...",
-      fetchReply: true,
-    });
+const { channels } = require("../config.json");
 
+module.exports = async (interaction) => {
+  // Initial Message
+  const sent = await interaction.reply({
+    content: "✈️ Pinging...",
+    fetchReply: true,
+  });
+
+  try {
     await interaction.editReply(
       `☢️ Roundtrip latency: ${
         sent.createdTimestamp - interaction.createdTimestamp

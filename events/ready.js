@@ -28,7 +28,6 @@ module.exports = {
       logchannel.send(
         `[ERROR]\n${new Date(Date.now()).toUTCString()}\nWaking BOT\n${error}`
       );
-      throw new Error(error);
     }
   },
 };

@@ -10,10 +10,10 @@ const { stats, networks, channels } = require("../config.json");
 // TODO : Make sure only verified members can do this (or any other role)
 
 module.exports = async (interaction) => {
+  // Initial Responce to client
+  await interaction.deferReply();
+  await interaction.editReply("🤖 Mining....");
   try {
-    // Initial Responce to client
-    await interaction.reply({ content: "🤖 Mining....", fetchReply: true });
-
     // Get the Network,token and address from user input
     const usrAddress = interaction.options.getString("address");
     const networkName = interaction.options.getString("network");
@@ -33,7 +33,7 @@ module.exports = async (interaction) => {
     //* Native Transfer (No Token)
     if (tokenName == networks[networkName].nativeCurrency) {
       // If the balance is too low (curBalance is string)
-      const curBalance = await getBalance(interaction, provider);
+      const curBalance = await getBalance(provider);
       if (parseFloat(curBalance) < stats.dailyEth) {
         await interaction.editReply(
           `😥 Insufficient funds, please donate to : ${stats.walletAddress}`
@@ -42,18 +42,13 @@ module.exports = async (interaction) => {
       }
 
       // Transaction
-      const tx = await transfer(interaction, provider, usrAddress);
+      const tx = await transfer(provider, usrAddress);
       await tx.wait();
     }
     //* Non Native Transfer (ERC-20)
     else {
       // If the balance is too low (curBalance is in a float)
-      const curBalance = await getBalance(
-        interaction,
-        provider,
-        tokenName,
-        networkName
-      );
+      const curBalance = await getBalance(provider, tokenName, networkName);
       if (curBalance < stats.dailyEth) {
         await interaction.editReply(
           `😥 Insufficient funds, please donate ${tokenName.toUpperCase()} to : ${
@@ -64,13 +59,7 @@ module.exports = async (interaction) => {
       }
 
       // Transaction
-      const tx = await transfer(
-        interaction,
-        provider,
-        usrAddress,
-        tokenName,
-        networkName
-      );
+      const tx = await transfer(provider, usrAddress, tokenName, networkName);
       await tx.wait();
     }
 

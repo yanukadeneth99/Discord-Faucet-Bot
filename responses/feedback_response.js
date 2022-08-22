@@ -50,6 +50,5 @@ module.exports = async (interaction) => {
         Date.now()
       ).toUTCString()}\nBuilding Feedback Modal\n${error}`
     );
-    throw new Error(error);
   }
 };
