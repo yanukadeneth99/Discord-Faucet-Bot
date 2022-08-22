@@ -5,8 +5,7 @@ const { networks, channels } = require("../config.json");
 
 module.exports = async (interaction) => {
   // Initial Responce to client
-  await interaction.deferReply();
-  await interaction.editReply("👩‍💻 Calculating....");
+  await interaction.reply({ content: "👩‍💻 Calculating....", fetchReply: true });
 
   try {
     let balance; // Holds the final balance (string)

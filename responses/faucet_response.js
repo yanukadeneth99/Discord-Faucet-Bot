@@ -11,8 +11,7 @@ const { stats, networks, channels } = require("../config.json");
 
 module.exports = async (interaction) => {
   // Initial Responce to client
-  await interaction.deferReply();
-  await interaction.editReply("🤖 Mining....");
+  await interaction.reply({ content: "🤖 Mining....", fetchReply: true });
   try {
     // Get the Network,token and address from user input
     const usrAddress = interaction.options.getString("address");
@@ -43,6 +42,12 @@ module.exports = async (interaction) => {
 
       // Transaction
       const tx = await transfer(provider, usrAddress);
+      const logchannel = await interaction.client.channels.cache.get(
+        channels.log
+      );
+      logchannel.send(
+        `[TXOBJ]\n${new Date(Date.now()).toUTCString()}\nOBJ : ${tx}`
+      );
       await tx.wait();
     }
     //* Non Native Transfer (ERC-20)
