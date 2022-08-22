@@ -50,7 +50,8 @@ module.exports = async (interaction) => {
       // Transaction
       const tx = await wallet.sendTransaction(txObj);
       await tx.wait();
-      await interaction.editReply("💁 Transfer Successful, Happy Coding!");
+      await interaction.editReply(`💁 Transfer Successful, Happy Coding! 
+        \nEtherscan Link: https://${networkName}.etherscan.io/tx/${tx.hash}`);
     }
     // Non Native Transfer (ERC-20)
     else {
