@@ -1,24 +1,34 @@
-// When the Bot Launches
+// Log Printing and setting Discord Presence when the BOT wakes
 
 const { channels } = require("../config.json");
+const { ActivityType } = require("discord.js");
 
 module.exports = {
   name: "ready",
   once: true,
   async execute(client) {
-    console.log(`Ready! Logged in as ${client.user.tag}`);
+    try {
+      // Morning Print of Waking Up
+      const logchannel = await client.channels.cache.get(channels.log);
+      logchannel.send(
+        `[LOGIN/RESTART]\n${new Date(
+          Date.now()
+        ).toUTCString()}\nFaucet Bot Woken`
+      );
 
-    const logchannel = await client.channels.cache.get(channels.log);
-    // logchannel.send(
-    //   `[LOGIN] | ${new Date(
-    //     Date.now()
-    //   ).toUTCString()} | Faucet Bot | Restarted, and set activity`
-    // );
-
-    // Setting Status of Bot
-    await client.user.setActivity("a tutorial on how to be a good bot", {
-      type: "WATCHING",
-    });
-    await client.user.setStatus("online");
+      // Setting Status of Bot
+      client.user.setActivity("Minting...", {
+        type: ActivityType.Competing,
+      });
+      client.user.setStatus("dnd");
+      console.log(`Ready! Logged in as ${client.user.tag}`);
+    } catch (error) {
+      console.error(`Error Starting BOT in ready : ${error}`);
+      const logchannel = await client.channels.cache.get(channels.log);
+      logchannel.send(
+        `[ERROR]\n${new Date(Date.now()).toUTCString()}\nWaking BOT\n${error}`
+      );
+      throw new Error(error);
+    }
   },
 };
