@@ -3,6 +3,10 @@
 const { Client, GatewayIntentBits } = require("discord.js");
 
 // Create a new Client with these permissions
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-
-module.exports = client;
+try {
+  const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+  module.exports = client;
+} catch (error) {
+  console.error(`Error getting client in client: ${error}`);
+  throw new Error(error);
+}
