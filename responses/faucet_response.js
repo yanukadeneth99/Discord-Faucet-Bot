@@ -8,6 +8,7 @@ const { stats, networks, channels } = require("../config.json");
 
 // TODO : Apply Rate Limiting
 // TODO : Make sure only verified members can do this (or any other role)
+// BUG : Find why mumbai transfers doesnt work
 
 module.exports = async (interaction) => {
   // Initial Responce to client
@@ -42,12 +43,6 @@ module.exports = async (interaction) => {
 
       // Transaction
       const tx = await transfer(provider, usrAddress);
-      const logchannel = await interaction.client.channels.cache.get(
-        channels.log
-      );
-      logchannel.send(
-        `[TXOBJ]\n${new Date(Date.now()).toUTCString()}\nOBJ : ${tx}`
-      );
       await tx.wait();
     }
     //* Non Native Transfer (ERC-20)
@@ -82,10 +77,10 @@ module.exports = async (interaction) => {
     await interaction.editReply("💁 Transfer Successful, Happy Coding!");
   } catch (error) {
     console.error(`Error Transferring : ${error}`);
-    const logchannel = await interaction.client.channels.cache.get(
-      channels.log
+    const errorchannel = await interaction.client.channels.cache.get(
+      channels.error
     );
-    logchannel.send(
+    errorchannel.send(
       `[ERROR]\n${new Date(Date.now()).toUTCString()}\nTransferring\n${error}`
     );
     await interaction.editReply({

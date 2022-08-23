@@ -2,6 +2,7 @@
 // Pass the token Name and Network Name if the transaction is meant to be using a ERC20 token
 
 // TODO : Handle nounce and gas fees
+// FIXME : Find issue with Matic Transfers
 
 const ethers = require("ethers");
 const { stats, tokens } = require("../config.json");

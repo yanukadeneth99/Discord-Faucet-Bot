@@ -42,10 +42,10 @@ module.exports = async (interaction) => {
     await interaction.showModal(modal);
   } catch (error) {
     console.error(`Error Creating Feedback Modal : ${error}`);
-    const logchannel = await interaction.client.channels.cache.get(
-      channels.log
+    const errorchannel = await interaction.client.channels.cache.get(
+      channels.error
     );
-    logchannel.send(
+    errorchannel.send(
       `[ERROR]\n${new Date(
         Date.now()
       ).toUTCString()}\nBuilding Feedback Modal\n${error}`

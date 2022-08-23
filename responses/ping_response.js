@@ -17,10 +17,10 @@ module.exports = async (interaction) => {
     );
   } catch (error) {
     console.error(`Error Getting Ping Response : ${error}`);
-    const logchannel = await interaction.client.channels.cache.get(
-      channels.log
+    const errorchannel = await interaction.client.channels.cache.get(
+      channels.error
     );
-    logchannel.send(
+    errorchannel.send(
       `[ERROR]\n${new Date(
         Date.now()
       ).toUTCString()}\nGetting Ping Response\n${error}`

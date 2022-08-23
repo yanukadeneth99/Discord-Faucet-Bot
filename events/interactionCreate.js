@@ -12,7 +12,7 @@ module.exports = {
   async execute(client, interaction) {
     try {
       // Get the Log Channel
-      const logchannel = await client.channels.cache.get(channels.log);
+      const errorchannel = await client.channels.cache.get(channels.error);
 
       //* Chat Command Interactions
       if (interaction.isChatInputCommand()) {
@@ -33,7 +33,7 @@ module.exports = {
             content: "👀 This Command does not exist!",
             ephemeral: true,
           });
-          logchannel.send(
+          errorchannel.send(
             `[ERROR]\n${new Date(
               Date.now()
             ).toUTCString()}\nInvalid Chat Command Passed\nBy : ${
@@ -56,7 +56,7 @@ module.exports = {
             });
           } catch (error) {
             console.error(`Error Submitting Feedback : ${error}`);
-            logchannel.send(
+            errorchannel.send(
               `[ERROR]\n${new Date(
                 Date.now()
               ).toUTCString()}\nSubmittingFeedback\n${error}`
@@ -73,7 +73,7 @@ module.exports = {
             content: "👀 Invalid Modal Interaction!",
             ephemeral: true,
           });
-          logchannel.send(
+          errorchannel.send(
             `[ERROR]\n${new Date(
               Date.now()
             ).toUTCString()}\nInvalid Modal Interaction\nBy : ${
@@ -89,9 +89,9 @@ module.exports = {
         return;
       }
     } catch (error) {
-      const logChannel = await client.channels.cache.get(channels.log);
+      const errorchannel = await client.channels.cache.get(channels.error);
       console.error(`Error Handling Interaction : ${error}`);
-      logChannel.send(
+      errorchannel.send(
         `[ERROR]\n${new Date(
           Date.now()
         ).toUTCString()}\nInteraction Handling\n${error}`
