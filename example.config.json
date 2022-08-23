@@ -8,9 +8,7 @@
     "log": "0000000000000",
     "error": "0000000000000"
   },
-  "roles": {
-    "admin": "0000000000000"
-  },
+  "bypassRoles": ["0000000000000"],
   "networks": {
     "goerli": {
       "nativeCurrency": "eth",
@@ -36,7 +34,8 @@
   "stats": {
     "walletAddress": "xxxxxxxx",
     "dailyEth": 1,
-    "maxFee": 95000000000
+    "maxFee": 95000000000,
+    "coolDownTime": 60000
   },
   "secrets": {
     "walletPrivateKey": "xxxxxxxxx",

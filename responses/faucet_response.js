@@ -4,13 +4,24 @@ const ethers = require("ethers");
 const getProvider = require("../utils/getProvider");
 const getBalance = require("../utils/getBalance");
 const transfer = require("../utils/transfer");
-const { stats, networks, channels } = require("../config.json");
+const {
+  stats,
+  networks,
+  tokens,
+  channels,
+  bypassRoles,
+} = require("../config.json");
 
 // TODO : Apply Rate Limiting
 // TODO : Make sure only verified members can do this (or any other role)
-// BUG : Find why mumbai transfers doesnt work
+// TODO : Return with user input if the needed variables are not there, like below :
+/*
+	if (!PRIVATE_KEY || !FROM_ADDRESS || !ALCHEMY_RINKEBY_URL) {
+		return ({ status: 'error', message: 'Missing environment variables, please ask human to set them up.' });
+	}
+*/
 
-module.exports = async (interaction) => {
+module.exports = async (keyv, interaction) => {
   // Initial Responce to client
   await interaction.reply({ content: "🤖 Mining....", fetchReply: true });
   try {
@@ -31,6 +42,25 @@ module.exports = async (interaction) => {
       return;
     }
 
+    //* Rate Limiting for non Admins
+    if (bypassRoles.some((role) => interaction.member.roles.cache.has(role))) {
+      const lastReqTime = await keyv.get(interaction.user.id);
+      if (lastReqTime) {
+        // CoolDownTime is set in Miliseconds.
+        if (Date.now() - lastReqTime < stats.coolDownTime) {
+          // Divide this by 60 if you want to shift to minutes
+          const timeLeft = Math.floor(
+            (stats.coolDownTime - (Date.now() - lastReqTime)) / 1000
+          );
+          await interaction.editReply(
+            `😎 Cool people waits for ${timeLeft} seconds`
+          );
+          return;
+        }
+      } else {
+        await keyv.set(interaction.user.id, Date.now());
+      }
+    }
     // Get the Provider based on the network
     const provider = getProvider(networkName);
 
@@ -56,6 +86,14 @@ module.exports = async (interaction) => {
     }
     //* Non Native Transfer (ERC-20)
     else {
+      // If there is no contract address for that token
+      if (!tokens[tokenName][networkName]) {
+        await interaction.editReply(
+          `😱 Token unavailable for network : ${networkName.toUpperCase()}`
+        );
+        return;
+      }
+
       // If the balance is too low (curBalance is in a float)
       const curBalance = await getBalance(provider, tokenName, networkName);
       if (curBalance < stats.dailyEth) {

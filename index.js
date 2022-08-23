@@ -1,9 +1,17 @@
 // Starting Point of the project : run `node .`
 const fs = require("node:fs");
 const path = require("node:path");
+const Keyv = require("keyv");
 const { Collection } = require("discord.js");
 const { secrets } = require("./config.json");
 const client = require("./client"); // Get Client
+
+// KeyV Creation and Handling
+const keyv = new Keyv();
+keyv.on("error", (err) => {
+  console.error("Keyv connection error:", err);
+  throw new Error("Error KEYV: ", err);
+});
 
 // Run the Events
 const eventsPath = path.join(__dirname, "events");
@@ -17,7 +25,7 @@ for (const file of eventFiles) {
   if (event.once) {
     client.once(event.name, (...args) => event.execute(...args));
   } else {
-    client.on(event.name, (...args) => event.execute(client, ...args));
+    client.on(event.name, (...args) => event.execute(keyv, client, ...args));
   }
 }
 

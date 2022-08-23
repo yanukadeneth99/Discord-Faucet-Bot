@@ -9,7 +9,7 @@ const feedback_handle = require("../modals/feedback_handle");
 
 module.exports = {
   name: "interactionCreate",
-  async execute(client, interaction) {
+  async execute(keyv, client, interaction) {
     try {
       // Get the Log Channel
       const errorchannel = await client.channels.cache.get(channels.error);
@@ -25,7 +25,7 @@ module.exports = {
         } else if (interaction.commandName === "balance") {
           require("../responses/balance_response")(interaction);
         } else if (interaction.commandName === "faucet") {
-          require("../responses/faucet_response")(interaction);
+          require("../responses/faucet_response")(keyv, interaction);
         }
         // Invalid Chat command passed
         else {

@@ -36,18 +36,6 @@ module.exports = async (interaction) => {
     await interaction.editReply(
       `[${networkName.toUpperCase()}] [${balancefinal}] [${tokenName.toUpperCase()}]`
     );
-
-    // Log out the transaction
-    // const logchannel = await interaction.client.channels.cache.get(
-    //   channels.log
-    // );
-    // logchannel.send(
-    //   `[BALANCE]\n${new Date(
-    //     Date.now()
-    //   ).toUTCString()}\nNetwork : ${networkName.toUpperCase()}\nToken : ${tokenName.toUpperCase()}\nBy : ${
-    //     interaction.user.username
-    //   }`
-    // );
   } catch (error) {
     console.error(`Error [RESPONCE - BALANCE] : ${error}`);
     const errorchannel = await interaction.client.channels.cache.get(

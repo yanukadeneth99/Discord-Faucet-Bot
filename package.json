@@ -16,6 +16,7 @@
     "discord-api-types": "^0.37.3",
     "discord.js": "^14.2.0",
     "dotenv": "^16.0.1",
-    "ethers": "^5.7.0"
+    "ethers": "^5.7.0",
+    "keyv": "^4.4.1"
   }
 }
