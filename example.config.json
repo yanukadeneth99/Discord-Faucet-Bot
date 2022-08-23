@@ -35,7 +35,8 @@
     "walletAddress": "xxxxxxxx",
     "dailyEth": 1,
     "maxFee": 95000000000,
-    "coolDownTime": 60000
+    "coolDownTime": 60000,
+    "feedbackCoolDown": 60000
   },
   "secrets": {
     "walletPrivateKey": "xxxxxxxxx",

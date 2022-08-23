@@ -15,12 +15,12 @@ module.exports = {
       client.user.setStatus("online");
 
       //Morning Print of Waking Up
-      // const logchannel = await client.channels.cache.get(channels.log);
-      // logchannel.send(
-      //   `[LOGIN/RESTART]\n${new Date(
-      //     Date.now()
-      //   ).toUTCString()}\nFaucet Bot Woken`
-      // );
+      const logchannel = await client.channels.cache.get(channels.log);
+      logchannel.send(
+        `[LOGIN/RESTART]\n${new Date(
+          Date.now()
+        ).toUTCString()}\nFaucet Bot Woken`
+      );
 
       console.log(`Ready! Logged in as ${client.user.tag}`);
     } catch (error) {

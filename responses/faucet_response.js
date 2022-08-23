@@ -5,21 +5,9 @@ const getProvider = require("../utils/getProvider");
 const getBalance = require("../utils/getBalance");
 const transfer = require("../utils/transfer");
 const handleRateLimiting = require("../utils/handleRateLimiting");
-const {
-  stats,
-  networks,
-  tokens,
-  channels,
-  bypassRoles,
-} = require("../config.json");
+const { stats, networks, tokens, channels } = require("../config.json");
 
 // TODO : Make sure only verified members can do this (or any other role)
-// TODO : Return with user input if the needed variables are not there, like below :
-/*
-	if (!PRIVATE_KEY || !FROM_ADDRESS || !ALCHEMY_RINKEBY_URL) {
-		return ({ status: 'error', message: 'Missing environment variables, please ask human to set them up.' });
-	}
-*/
 
 module.exports = async (keyv, interaction) => {
   // Initial Responce to client

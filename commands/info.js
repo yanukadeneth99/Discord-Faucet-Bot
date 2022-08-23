@@ -10,7 +10,7 @@ module.exports = {
     .setName("info")
     .setDescription("Get info about a user or the server")
     .setDMPermission(false)
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+    .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .addSubcommand((subcommand) =>
       subcommand
         .setName("user")
