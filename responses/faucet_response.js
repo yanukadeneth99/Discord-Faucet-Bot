@@ -7,8 +7,6 @@ const transfer = require("../utils/transfer");
 const handleRateLimiting = require("../utils/handleRateLimiting");
 const { stats, networks, tokens, channels } = require("../config.json");
 
-// TODO : Make sure only verified members can do this (or any other role)
-
 module.exports = async (keyv, interaction) => {
   // Initial Responce to client
   await interaction.reply({ content: "🤖 Mining....", fetchReply: true });
@@ -20,9 +18,8 @@ module.exports = async (keyv, interaction) => {
     // Get the Network,token and address from user input
     const usrAddress = interaction.options.getString("address");
     const networkName = interaction.options.getString("network");
-    const tokenName =
-      interaction.options.getString("token") ??
-      networks[networkName].nativeCurrency;
+    const tokenName = interaction.options.getString("token") ?? 3;
+    networks[networkName].nativeCurrency;
 
     // Check whether address is valid
     if (!ethers.utils.isAddress(usrAddress)) {
@@ -40,6 +37,24 @@ module.exports = async (keyv, interaction) => {
       if (parseFloat(curBalance) < stats.dailyEth) {
         await interaction.editReply(
           `😥 Insufficient funds, please donate to : ${stats.walletAddress}`
+        );
+        return;
+      }
+
+      // Rate Limiting for nonce
+      const nonceLimit = await handleRateLimiting(
+        keyv,
+        interaction,
+        networkName,
+        stats.globalCoolDown,
+        true
+      );
+      if (nonceLimit) {
+        const timeLeft = Math.floor(
+          (stats.coolDownTime - (Date.now() - limit)) / 1000
+        );
+        await interaction.editReply(
+          `🥶 Please wait for ${timeLeft} seconds before requesting`
         );
         return;
       }
@@ -69,6 +84,8 @@ module.exports = async (keyv, interaction) => {
         ).toUTCString()}\n${JSON.stringify(tx)}`
       );
       await tx.wait();
+      await keyv.set(`${interaction.user.id}:${networkName}`, Date.now());
+      await keyv.set(`${networkName}`, Date.now());
     }
     //* Non Native Transfer (ERC-20)
     else {
@@ -116,6 +133,7 @@ module.exports = async (keyv, interaction) => {
         ).toUTCString()}\n${JSON.stringify(tx)}`
       );
       await tx.wait();
+      await keyv.set(`${interaction.user.id}:${tokenName}`, Date.now());
     }
 
     // Transfer Success

@@ -52,6 +52,7 @@ module.exports = {
               content: `💁🏼‍♂️ Your feedback was received successfully!`,
               ephemeral: true,
             });
+            await keyv.set(`${interaction.user.id}:feedback`, Date.now());
           } catch (error) {
             console.error(`Error Submitting Feedback : ${error}`);
             errorchannel.send(
