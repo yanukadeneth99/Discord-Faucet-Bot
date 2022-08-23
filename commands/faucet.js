@@ -3,13 +3,14 @@ Users can use to claim free eth daily per account from the passed network and to
 * Change this if you add more networks/tokens and deploy the commands again using `node deploy-commands`
 */
 
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("faucet")
     .setDescription("Claim daily ETH from the faucet")
     .setDMPermission(false)
+    .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
     .addStringOption((option) =>
       option
         .setName("address")

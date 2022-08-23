@@ -10,5 +10,5 @@ module.exports = {
     .setName("ping")
     .setDescription("Check the ping of the bot")
     .setDMPermission(false)
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+    .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 };

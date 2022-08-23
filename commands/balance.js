@@ -13,7 +13,7 @@ module.exports = {
       "Get the balance remaining of the Faucet depending on the passed network and token"
     )
     .setDMPermission(false)
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
+    .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers)
     .addStringOption((option) =>
       option
         .setName("network")

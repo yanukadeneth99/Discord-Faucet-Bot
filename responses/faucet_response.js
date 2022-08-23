@@ -4,13 +4,12 @@ const ethers = require("ethers");
 const getProvider = require("../utils/getProvider");
 const getBalance = require("../utils/getBalance");
 const transfer = require("../utils/transfer");
-const { stats, networks, channels } = require("../config.json");
+const handleRateLimiting = require("../utils/handleRateLimiting");
+const { stats, networks, tokens, channels } = require("../config.json");
 
-// TODO : Apply Rate Limiting
 // TODO : Make sure only verified members can do this (or any other role)
-// BUG : Find why mumbai transfers doesnt work
 
-module.exports = async (interaction) => {
+module.exports = async (keyv, interaction) => {
   // Initial Responce to client
   await interaction.reply({ content: "🤖 Mining....", fetchReply: true });
   try {
@@ -45,6 +44,23 @@ module.exports = async (interaction) => {
         return;
       }
 
+      // Rate Limiting for non Admins
+      const limit = await handleRateLimiting(
+        keyv,
+        interaction,
+        networkName,
+        stats.coolDownTime
+      );
+      if (limit) {
+        const timeLeft = Math.floor(
+          (stats.coolDownTime - (Date.now() - limit)) / 1000
+        );
+        await interaction.editReply(
+          `😎 Cool people waits for ${timeLeft} seconds`
+        );
+        return;
+      }
+
       // Transaction
       const tx = await transfer(provider, usrAddress, networkName);
       logchannel.send(
@@ -56,6 +72,14 @@ module.exports = async (interaction) => {
     }
     //* Non Native Transfer (ERC-20)
     else {
+      // If there is no contract address for that token
+      if (!tokens[tokenName][networkName]) {
+        await interaction.editReply(
+          `😱 Token unavailable for network : ${networkName.toUpperCase()}`
+        );
+        return;
+      }
+
       // If the balance is too low (curBalance is in a float)
       const curBalance = await getBalance(provider, tokenName, networkName);
       if (curBalance < stats.dailyEth) {
@@ -63,6 +87,23 @@ module.exports = async (interaction) => {
           `😥 Insufficient funds, please donate ${tokenName.toUpperCase()} to : ${
             stats.walletAddress
           }`
+        );
+        return;
+      }
+
+      // Rate Limiting for non Admins
+      const limit = await handleRateLimiting(
+        keyv,
+        interaction,
+        tokenName,
+        stats.coolDownTime
+      );
+      if (limit) {
+        const timeLeft = Math.floor(
+          (stats.coolDownTime - (Date.now() - limit)) / 1000
+        );
+        await interaction.editReply(
+          `😎 Cool people waits for ${timeLeft} seconds`
         );
         return;
       }
@@ -95,7 +136,7 @@ module.exports = async (interaction) => {
       `[ERROR]\n${new Date(Date.now()).toUTCString()}\nTransferring\n${error}`
     );
     await interaction.editReply({
-      content: "🙇‍♂️ Error, please try again later",
+      content: "🙇‍♂️ Error : Please try again in few minutes",
       ephemeral: true,
     });
   }

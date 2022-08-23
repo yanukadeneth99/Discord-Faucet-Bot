@@ -1,15 +1,13 @@
 //* Handles all kinds of interactions
 // Add all new commands build to here
 
-// TODO : Remove Catches from here and handle them in the responses themselves
-
 const { InteractionType } = require("discord.js");
 const { channels } = require("../config.json");
 const feedback_handle = require("../modals/feedback_handle");
 
 module.exports = {
   name: "interactionCreate",
-  async execute(client, interaction) {
+  async execute(keyv, client, interaction) {
     try {
       // Get the Log Channel
       const errorchannel = await client.channels.cache.get(channels.error);
@@ -21,11 +19,11 @@ module.exports = {
         } else if (interaction.commandName === "ping") {
           require("../responses/ping_response")(interaction);
         } else if (interaction.commandName === "feedback") {
-          require("../responses/feedback_response")(interaction);
+          require("../responses/feedback_response")(keyv, interaction);
         } else if (interaction.commandName === "balance") {
           require("../responses/balance_response")(interaction);
         } else if (interaction.commandName === "faucet") {
-          require("../responses/faucet_response")(interaction);
+          require("../responses/faucet_response")(keyv, interaction);
         }
         // Invalid Chat command passed
         else {
