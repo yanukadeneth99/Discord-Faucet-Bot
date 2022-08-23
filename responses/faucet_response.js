@@ -18,8 +18,9 @@ module.exports = async (keyv, interaction) => {
     // Get the Network,token and address from user input
     const usrAddress = interaction.options.getString("address");
     const networkName = interaction.options.getString("network");
-    const tokenName = interaction.options.getString("token") ?? 3;
-    networks[networkName].nativeCurrency;
+    const tokenName =
+      interaction.options.getString("token") ??
+      networks[networkName].nativeCurrency;
 
     // Check whether address is valid
     if (!ethers.utils.isAddress(usrAddress)) {
@@ -51,13 +52,14 @@ module.exports = async (keyv, interaction) => {
       );
       if (nonceLimit) {
         const timeLeft = Math.floor(
-          (stats.coolDownTime - (Date.now() - limit)) / 1000
+          (stats.coolDownTime - (Date.now() - nonceLimit)) / 1000
         );
         await interaction.editReply(
           `🥶 Please wait for ${timeLeft} seconds before requesting`
         );
         return;
       }
+      await keyv.set(`${networkName}`, Date.now());
 
       // Rate Limiting for non Admins
       const limit = await handleRateLimiting(
@@ -85,7 +87,6 @@ module.exports = async (keyv, interaction) => {
       );
       await tx.wait();
       await keyv.set(`${interaction.user.id}:${networkName}`, Date.now());
-      await keyv.set(`${networkName}`, Date.now());
     }
     //* Non Native Transfer (ERC-20)
     else {
