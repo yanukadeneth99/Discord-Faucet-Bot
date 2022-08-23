@@ -4,6 +4,7 @@ const ethers = require("ethers");
 const getProvider = require("../utils/getProvider");
 const getBalance = require("../utils/getBalance");
 const transfer = require("../utils/transfer");
+const handleRateLimiting = require("../utils/handleRateLimiting");
 const {
   stats,
   networks,
@@ -12,7 +13,6 @@ const {
   bypassRoles,
 } = require("../config.json");
 
-// TODO : Apply Rate Limiting
 // TODO : Make sure only verified members can do this (or any other role)
 // TODO : Return with user input if the needed variables are not there, like below :
 /*
@@ -42,25 +42,6 @@ module.exports = async (keyv, interaction) => {
       return;
     }
 
-    //* Rate Limiting for non Admins
-    if (bypassRoles.some((role) => interaction.member.roles.cache.has(role))) {
-      const lastReqTime = await keyv.get(interaction.user.id);
-      if (lastReqTime) {
-        // CoolDownTime is set in Miliseconds.
-        if (Date.now() - lastReqTime < stats.coolDownTime) {
-          // Divide this by 60 if you want to shift to minutes
-          const timeLeft = Math.floor(
-            (stats.coolDownTime - (Date.now() - lastReqTime)) / 1000
-          );
-          await interaction.editReply(
-            `😎 Cool people waits for ${timeLeft} seconds`
-          );
-          return;
-        }
-      } else {
-        await keyv.set(interaction.user.id, Date.now());
-      }
-    }
     // Get the Provider based on the network
     const provider = getProvider(networkName);
 
@@ -71,6 +52,23 @@ module.exports = async (keyv, interaction) => {
       if (parseFloat(curBalance) < stats.dailyEth) {
         await interaction.editReply(
           `😥 Insufficient funds, please donate to : ${stats.walletAddress}`
+        );
+        return;
+      }
+
+      // Rate Limiting for non Admins
+      const limit = await handleRateLimiting(
+        keyv,
+        interaction,
+        networkName,
+        stats.coolDownTime
+      );
+      if (limit) {
+        const timeLeft = Math.floor(
+          (stats.coolDownTime - (Date.now() - limit)) / 1000
+        );
+        await interaction.editReply(
+          `😎 Cool people waits for ${timeLeft} seconds`
         );
         return;
       }
@@ -105,6 +103,23 @@ module.exports = async (keyv, interaction) => {
         return;
       }
 
+      // Rate Limiting for non Admins
+      const limit = await handleRateLimiting(
+        keyv,
+        interaction,
+        tokenName,
+        stats.coolDownTime
+      );
+      if (limit) {
+        const timeLeft = Math.floor(
+          (stats.coolDownTime - (Date.now() - limit)) / 1000
+        );
+        await interaction.editReply(
+          `😎 Cool people waits for ${timeLeft} seconds`
+        );
+        return;
+      }
+
       // Transaction
       const tx = await transfer(provider, usrAddress, networkName, tokenName);
       logchannel.send(
@@ -133,7 +148,7 @@ module.exports = async (keyv, interaction) => {
       `[ERROR]\n${new Date(Date.now()).toUTCString()}\nTransferring\n${error}`
     );
     await interaction.editReply({
-      content: "🙇‍♂️ Error, please try again later",
+      content: "🙇‍♂️ Error : Please try again in few minutes",
       ephemeral: true,
     });
   }

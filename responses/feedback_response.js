@@ -1,15 +1,34 @@
 // Responds the user by building a Form
-//TODO : Rate Limit Feedbacks
+
 const {
   ActionRowBuilder,
   ModalBuilder,
   TextInputBuilder,
   TextInputStyle,
 } = require("discord.js");
-const { channels } = require("../config.json");
+const handleRateLimiting = require("../utils/handleRateLimiting");
+const { channels, stats } = require("../config.json");
 
-module.exports = async (interaction) => {
+module.exports = async (keyv, interaction) => {
   try {
+    // Rate Limiting for non Admins
+    const limit = await handleRateLimiting(
+      keyv,
+      interaction,
+      "feedback",
+      stats.feedbackCoolDown
+    );
+    if (limit) {
+      const timeLeft = Math.floor(
+        (stats.coolDownTime - (Date.now() - limit)) / 1000
+      );
+      await interaction.reply({
+        content: `❄️ Please give us ${timeLeft} seconds to cooldown`,
+        ephemeral: true,
+      });
+      return;
+    }
+
     // Create the modal
     const modal = new ModalBuilder()
       .setCustomId("feedbackModal")
