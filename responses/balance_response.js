@@ -4,13 +4,10 @@ const getBalance = require("../utils/getBalance");
 const { networks, channels } = require("../config.json");
 
 module.exports = async (interaction) => {
-  try {
-    // Initial Responce to client
-    await interaction.reply({
-      content: "👩‍💻 Calculating....",
-      fetchReply: true,
-    });
+  // Initial Responce to client
+  await interaction.reply({ content: "👩‍💻 Calculating....", fetchReply: true });
 
+  try {
     let balance; // Holds the final balance (string)
 
     // Get the Network and token from user input
@@ -24,10 +21,10 @@ module.exports = async (interaction) => {
 
     if (networks[networkName].nativeCurrency == tokenName) {
       //* Token not passed or native Currency (No ERC20 tokens)
-      balance = await getBalance(interaction, provider);
+      balance = await getBalance(provider);
     } else {
       //* Non native token (ERC 20 token)
-      balance = await getBalance(interaction, provider, tokenName, networkName);
+      balance = await getBalance(provider, tokenName, networkName);
     }
 
     // Rounding off the value
@@ -41,26 +38,26 @@ module.exports = async (interaction) => {
     );
 
     // Log out the transaction
-    const logchannel = await interaction.client.channels.cache.get(
-      channels.log
-    );
-    logchannel.send(
-      `[BALANCE]\n${new Date(
-        Date.now()
-      ).toUTCString()}\nNetwork : ${networkName.toUpperCase()}\nToken : ${tokenName.toUpperCase()}\nBy : ${
-        interaction.user.username
-      }`
-    );
+    // const logchannel = await interaction.client.channels.cache.get(
+    //   channels.log
+    // );
+    // logchannel.send(
+    //   `[BALANCE]\n${new Date(
+    //     Date.now()
+    //   ).toUTCString()}\nNetwork : ${networkName.toUpperCase()}\nToken : ${tokenName.toUpperCase()}\nBy : ${
+    //     interaction.user.username
+    //   }`
+    // );
   } catch (error) {
     console.error(`Error [RESPONCE - BALANCE] : ${error}`);
-    const logchannel = await interaction.client.channels.cache.get(
-      channels.log
+    const errorchannel = await interaction.client.channels.cache.get(
+      channels.error
     );
-    logchannel.send(
+    errorchannel.send(
       `[ERROR]\n${new Date(
         Date.now()
       ).toUTCString()}\nGetting Balance\n${error}`
     );
-    await interaction.reply("🙇‍♂️ Error, please try again later");
+    await interaction.editReply("🙇‍♂️ Error, please try again later");
   }
 };

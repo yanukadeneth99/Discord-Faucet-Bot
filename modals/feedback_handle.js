@@ -4,27 +4,17 @@
 const { channels } = require("../config.json");
 
 module.exports = async (client, interaction) => {
-  try {
-    // Get the Feedback Channel
-    const fdChannel = await client.channels.cache.get(channels.feedback);
+  // Get the Feedback Channel
+  const fdChannel = await client.channels.cache.get(channels.feedback);
 
-    // Get the value of the modal interactions
-    const subject = interaction.fields.getTextInputValue("subject");
-    const description = interaction.fields.getTextInputValue("description");
-    const user = interaction.user.username;
+  // Get the value of the modal interactions
+  const subject = interaction.fields.getTextInputValue("subject");
+  const description = interaction.fields.getTextInputValue("description");
+  const user = interaction.user.username;
 
-    fdChannel.send(
-      `[FEEDBACK]\n${new Date(
-        Date.now()
-      ).toUTCString()}\nPerson : ${user}\nSubject : ${subject}\nDescription : ${description}`
-    );
-  } catch (error) {
-    console.error(error);
-    const logchannel = await client.channels.cache.get(channels.log);
-    logchannel.send(
-      `[ERROR]\n${new Date(
-        Date.now()
-      ).toUTCString()}\nHandling Feedback Submission\n${error}`
-    );
-  }
+  fdChannel.send(
+    `[FEEDBACK]\n${new Date(
+      Date.now()
+    ).toUTCString()}\nPerson : ${user}\nSubject : ${subject}\nDescription : ${description}`
+  );
 };
