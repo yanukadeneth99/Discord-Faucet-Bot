@@ -2,7 +2,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { Collection } = require("discord.js");
-const { bot } = require("./config.json");
+const { secrets } = require("./config.json");
 const client = require("./client"); // Get Client
 
 // Run the Events
@@ -39,7 +39,7 @@ for (const file of commandFiles) {
 
 // Login to Bot with token
 try {
-  client.login(bot.token);
+  client.login(secrets.BotToken);
 } catch (error) {
   console.error(`Error login to BOT at index : ${error}`);
 }
