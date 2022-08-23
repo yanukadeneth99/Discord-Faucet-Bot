@@ -17,10 +17,10 @@ module.exports = {
       // );
 
       // Setting Status of Bot
-      client.user.setActivity("Minting...", {
-        type: ActivityType.Competing,
+      client.user.setActivity("LearnWeb3DAO", {
+        type: ActivityType.Watching,
       });
-      client.user.setStatus("dnd");
+      client.user.setStatus("online");
       console.log(`Ready! Logged in as ${client.user.tag}`);
     } catch (error) {
       console.error(`Error Starting BOT in ready : ${error}`);

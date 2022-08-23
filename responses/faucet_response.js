@@ -14,6 +14,10 @@ module.exports = async (interaction) => {
   // Initial Responce to client
   await interaction.reply({ content: "🤖 Mining....", fetchReply: true });
   try {
+    // Setup the log channel
+    const logchannel = await interaction.client.channels.cache.get(
+      channels.log
+    );
     // Get the Network,token and address from user input
     const usrAddress = interaction.options.getString("address");
     const networkName = interaction.options.getString("network");
@@ -42,7 +46,12 @@ module.exports = async (interaction) => {
       }
 
       // Transaction
-      const tx = await transfer(provider, usrAddress);
+      const tx = await transfer(provider, usrAddress, networkName);
+      logchannel.send(
+        `[TX OBJ - NATIVE]\n${new Date(
+          Date.now()
+        ).toUTCString()}\n${JSON.stringify(tx)}`
+      );
       await tx.wait();
     }
     //* Non Native Transfer (ERC-20)
@@ -59,14 +68,16 @@ module.exports = async (interaction) => {
       }
 
       // Transaction
-      const tx = await transfer(provider, usrAddress, tokenName, networkName);
+      const tx = await transfer(provider, usrAddress, networkName, tokenName);
+      logchannel.send(
+        `[TX OBJ - ERC20]\n${new Date(
+          Date.now()
+        ).toUTCString()}\n${JSON.stringify(tx)}`
+      );
       await tx.wait();
     }
 
     // Transfer Success
-    const logchannel = await interaction.client.channels.cache.get(
-      channels.log
-    );
     logchannel.send(
       `[TRANSFER]\n${new Date(
         Date.now()
