@@ -54,14 +54,13 @@ module.exports = async (keyv, interaction) => {
       );
       if (nonceLimit) {
         const timeLeft = Math.floor(
-          (stats.coolDownTime - (Date.now() - nonceLimit)) / 1000
+          (stats.globalCoolDown - (Date.now() - nonceLimit)) / 1000
         );
         await interaction.editReply(
           `🥶 Please wait for ${timeLeft} seconds before requesting`
         );
         return;
       }
-      await keyv.set(`${networkName}`, Date.now());
 
       // Rate Limiting for non Admins
       const limit = await handleRateLimiting(
@@ -78,6 +77,8 @@ module.exports = async (keyv, interaction) => {
           `😎 Cool people waits for ${timeLeft} seconds`
         );
         return;
+      } else {
+        await keyv.set(`${networkName}`, Date.now());
       }
 
       // Transaction
@@ -114,7 +115,7 @@ module.exports = async (keyv, interaction) => {
 
       // If the balance is too low (curBalance is in a float)
       const curBalance = await getBalance(provider, tokenName, networkName);
-      if (parseFloat(curBalance) < stats.dailyEth) {
+      if (parseFloat(curBalance) < tokens[tokenName].amount) {
         await interaction.editReply(
           `😥 Insufficient funds, please donate ${tokenName.toUpperCase()} to : ${
             stats.walletAddress
@@ -133,14 +134,13 @@ module.exports = async (keyv, interaction) => {
       );
       if (nonceLimit) {
         const timeLeft = Math.floor(
-          (stats.coolDownTime - (Date.now() - nonceLimit)) / 1000
+          (stats.globalCoolDown - (Date.now() - nonceLimit)) / 1000
         );
         await interaction.editReply(
           `🥶 Please wait for ${timeLeft} seconds before requesting`
         );
         return;
       }
-      await keyv.set(`${networkName}`, Date.now());
 
       // Rate Limiting for non Admins
       const limit = await handleRateLimiting(
@@ -157,6 +157,8 @@ module.exports = async (keyv, interaction) => {
           `😎 Cool people waits for ${timeLeft} seconds`
         );
         return;
+      } else {
+        await keyv.set(`${networkName}`, Date.now());
       }
 
       // Transaction

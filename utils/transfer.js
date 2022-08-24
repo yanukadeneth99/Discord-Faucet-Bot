@@ -23,7 +23,7 @@ module.exports = async (provider, usrAddress, networkName, tokenName) => {
         type: 2,
         maxFeePerGas: stats.maxFee,
         maxPriorityFeePerGas: stats.maxFee,
-        gasLimit: "35000",
+        gasLimit: "21000",
       };
     } else {
       //* Non-Polygon Networks
@@ -32,9 +32,6 @@ module.exports = async (provider, usrAddress, networkName, tokenName) => {
         nonce,
         value: ethers.utils.parseEther(stats.dailyEth.toString()),
         type: 2,
-        maxFeePerGas: stats.maxFee,
-        maxPriorityFeePerGas: stats.maxFee,
-        gasLimit: "35000",
       };
     }
 
@@ -54,10 +51,7 @@ module.exports = async (provider, usrAddress, networkName, tokenName) => {
     // Create Transaction object
     return await contract.transfer(
       usrAddress,
-      ethers.utils.parseEther(tokens[tokenName].amount.toString(), decimals),
-      {
-        gasLimit: "35000",
-      }
+      ethers.utils.parseEther(tokens[tokenName].amount.toString(), decimals)
     );
   }
 };
