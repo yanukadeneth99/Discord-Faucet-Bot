@@ -7,8 +7,6 @@ const transfer = require("../utils/transfer");
 const handleRateLimiting = require("../utils/handleRateLimiting");
 const { stats, networks, tokens, channels } = require("../config.json");
 
-// TODO : Make sure only verified members can do this (or any other role)
-
 module.exports = async (keyv, interaction) => {
   // Initial Responce to client
   await interaction.reply({ content: "🤖 Mining....", fetchReply: true });
@@ -44,6 +42,25 @@ module.exports = async (keyv, interaction) => {
         return;
       }
 
+      // Rate Limiting for nonce
+      const nonceLimit = await handleRateLimiting(
+        keyv,
+        interaction,
+        networkName,
+        stats.globalCoolDown,
+        true
+      );
+      if (nonceLimit) {
+        const timeLeft = Math.floor(
+          (stats.coolDownTime - (Date.now() - nonceLimit)) / 1000
+        );
+        await interaction.editReply(
+          `🥶 Please wait for ${timeLeft} seconds before requesting`
+        );
+        return;
+      }
+      await keyv.set(`${networkName}`, Date.now());
+
       // Rate Limiting for non Admins
       const limit = await handleRateLimiting(
         keyv,
@@ -69,6 +86,7 @@ module.exports = async (keyv, interaction) => {
         ).toUTCString()}\n${JSON.stringify(tx)}`
       );
       await tx.wait();
+      await keyv.set(`${interaction.user.id}:${networkName}`, Date.now());
     }
     //* Non Native Transfer (ERC-20)
     else {
@@ -116,6 +134,7 @@ module.exports = async (keyv, interaction) => {
         ).toUTCString()}\n${JSON.stringify(tx)}`
       );
       await tx.wait();
+      await keyv.set(`${interaction.user.id}:${tokenName}`, Date.now());
     }
 
     // Transfer Success
