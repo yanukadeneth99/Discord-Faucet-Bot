@@ -114,7 +114,7 @@ module.exports = async (keyv, interaction) => {
 
       // If the balance is too low (curBalance is in a float)
       const curBalance = await getBalance(provider, tokenName, networkName);
-      if (curBalance < stats.dailyEth) {
+      if (parseFloat(curBalance) < stats.dailyEth) {
         await interaction.editReply(
           `😥 Insufficient funds, please donate ${tokenName.toUpperCase()} to : ${
             stats.walletAddress

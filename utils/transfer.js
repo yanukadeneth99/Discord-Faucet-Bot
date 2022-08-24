@@ -56,8 +56,6 @@ module.exports = async (provider, usrAddress, networkName, tokenName) => {
       usrAddress,
       ethers.utils.parseEther(tokens[tokenName].amount.toString(), decimals),
       {
-        maxFeePerGas: stats.maxFee,
-        maxPriorityFeePerGas: stats.maxFee,
         gasLimit: "35000",
       }
     );
