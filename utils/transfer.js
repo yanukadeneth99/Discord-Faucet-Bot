@@ -23,7 +23,7 @@ module.exports = async (provider, usrAddress, networkName, tokenName) => {
         type: 2,
         maxFeePerGas: stats.maxFee,
         maxPriorityFeePerGas: stats.maxFee,
-        gasLimit: "21000",
+        gasLimit: "35000",
       };
     } else {
       //* Non-Polygon Networks
@@ -34,7 +34,7 @@ module.exports = async (provider, usrAddress, networkName, tokenName) => {
         type: 2,
         maxFeePerGas: stats.maxFee,
         maxPriorityFeePerGas: stats.maxFee,
-        gasLimit: "21000",
+        gasLimit: "35000",
       };
     }
 
@@ -58,6 +58,7 @@ module.exports = async (provider, usrAddress, networkName, tokenName) => {
       {
         maxFeePerGas: stats.maxFee,
         maxPriorityFeePerGas: stats.maxFee,
+        gasLimit: "35000",
       }
     );
   }

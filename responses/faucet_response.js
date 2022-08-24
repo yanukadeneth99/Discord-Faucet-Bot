@@ -123,6 +123,25 @@ module.exports = async (keyv, interaction) => {
         return;
       }
 
+      // Rate Limiting for nonce
+      const nonceLimit = await handleRateLimiting(
+        keyv,
+        interaction,
+        networkName,
+        stats.globalCoolDown,
+        true
+      );
+      if (nonceLimit) {
+        const timeLeft = Math.floor(
+          (stats.coolDownTime - (Date.now() - nonceLimit)) / 1000
+        );
+        await interaction.editReply(
+          `🥶 Please wait for ${timeLeft} seconds before requesting`
+        );
+        return;
+      }
+      await keyv.set(`${networkName}`, Date.now());
+
       // Rate Limiting for non Admins
       const limit = await handleRateLimiting(
         keyv,
