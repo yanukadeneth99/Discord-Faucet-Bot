@@ -12,7 +12,9 @@ module.exports = async (provider, tokenName, networkName) => {
     if (!address) throw Error("Token Address not found!");
 
     const contract = new ethers.Contract(address, erc20ABI, provider);
-    return (await contract.balanceOf(stats.walletAddress)).toString();
+    return await ethers.utils.formatEther(
+      (await contract.balanceOf(stats.walletAddress)).toString()
+    );
   }
 
   //* Native Balance

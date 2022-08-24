@@ -32,9 +32,6 @@ module.exports = async (provider, usrAddress, networkName, tokenName) => {
         nonce,
         value: ethers.utils.parseEther(stats.dailyEth.toString()),
         type: 2,
-        maxFeePerGas: stats.maxFee,
-        maxPriorityFeePerGas: stats.maxFee,
-        gasLimit: "21000",
       };
     }
 
@@ -54,11 +51,7 @@ module.exports = async (provider, usrAddress, networkName, tokenName) => {
     // Create Transaction object
     return await contract.transfer(
       usrAddress,
-      ethers.utils.parseEther(tokens[tokenName].amount.toString(), decimals),
-      {
-        maxFeePerGas: stats.maxFee,
-        maxPriorityFeePerGas: stats.maxFee,
-      }
+      ethers.utils.parseEther(tokens[tokenName].amount.toString(), decimals)
     );
   }
 };
