@@ -1,9 +1,11 @@
 // Transfers the set dailyEth value to the requested user.
 // Rate limited to daily
 const ethers = require("ethers");
+const { EmbedBuilder } = require("discord.js");
 const getProvider = require("../utils/getProvider");
 const getBalance = require("../utils/getBalance");
 const transfer = require("../utils/transfer");
+const getTxName = require("../utils/getTxName");
 const handleRateLimiting = require("../utils/handleRateLimiting");
 const { stats, networks, tokens, channels } = require("../config.json");
 
@@ -85,6 +87,18 @@ module.exports = async (keyv, interaction) => {
           Date.now()
         ).toUTCString()}\n${JSON.stringify(tx)}`
       );
+      const string = await getTxName(networkName);
+      const embed = new EmbedBuilder()
+        .setColor("#3BA55C")
+        .setDescription(
+          `[View on ${
+            networkName == "mumbai" ? "Polygonscan" : "Etherscan"
+          }](${string}${tx.hash})`
+        );
+      await interaction.editReply({
+        content: `👨‍🏭 Working Hard, please wait...`,
+        embeds: [embed],
+      });
       await tx.wait();
       await keyv.set(`${interaction.user.id}:${networkName}`, Date.now());
     }
@@ -133,6 +147,18 @@ module.exports = async (keyv, interaction) => {
           Date.now()
         ).toUTCString()}\n${JSON.stringify(tx)}`
       );
+      const string = await getTxName(networkName);
+      const embed = new EmbedBuilder()
+        .setColor("#3BA55C")
+        .setDescription(
+          `[View on ${
+            networkName == "mumbai" ? "Polygonscan" : "Etherscan"
+          }](${string}${tx.hash})`
+        );
+      await interaction.editReply({
+        content: `👨‍🏭 Working Hard, please wait...`,
+        embeds: [embed],
+      });
       await tx.wait();
       await keyv.set(`${interaction.user.id}:${tokenName}`, Date.now());
     }
