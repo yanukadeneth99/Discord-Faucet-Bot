@@ -12,11 +12,17 @@
   "networks": {
     "goerli": {
       "nativeCurrency": "eth",
-      "ALCHEMY_URL": "https://eth-goerli.g.alchemy.com/v2/xxxxxxxxxxxx"
+      "ALCHEMY_URL": "https://eth-goerli.g.alchemy.com/v2/xxxxxxxxxxxx",
+      "chainId": 5,
+      "name": "goerli",
+      "INFURA_KEY": "xxxxxxxxxxxxxxxxxxxxxx"
     },
     "rinkeby": {
       "nativeCurrency": "eth",
-      "ALCHEMY_URL": "https://eth-rinkeby.alchemyapi.io/v2/xxxxxxxxxxx"
+      "ALCHEMY_URL": "https://eth-rinkeby.alchemyapi.io/v2/xxxxxxxxxxx",
+      "chainId": 4,
+      "name": "rinkeby",
+      "INFURA_KEY": "xxxxxxxxxxxxxxxxxxxxxx"
     },
     "mumbai": {
       "nativeCurrency": "matic",
