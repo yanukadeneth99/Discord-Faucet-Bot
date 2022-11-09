@@ -2,12 +2,13 @@
 // Pass the token Name and Network Name if the transaction is meant to be using a ERC20 token
 
 const ethers = require("ethers");
-const { stats, secrets, tokens } = require("../config.json");
+const { stats, tokens } = require("../config.json");
 const erc20ABI = require("../libs/erc20.json");
+require("dotenv").config();
 
 module.exports = async (provider, usrAddress, networkName, tokenName) => {
   // Create a wallet instance
-  const wallet = new ethers.Wallet(secrets.walletPrivateKey, provider);
+  const wallet = new ethers.Wallet(process.env.WALLET_PRIVATE_KEY, provider);
 
   //* Native Transfer
   if (!tokenName) {

@@ -2,10 +2,11 @@
 
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord.js");
-const { bot, secrets } = require("../config.json");
+const { bot } = require("../config.json");
+require("dotenv").config();
 
 module.exports = async (globally = false) => {
-  const rest = new REST({ version: "10" }).setToken(secrets.BotToken);
+  const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
 
   //! Removes the commands globally
   if (globally) {

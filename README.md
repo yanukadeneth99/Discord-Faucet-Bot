@@ -6,6 +6,13 @@ This is a Discord Bot that dispenses Testnet ETH.
 
 Change the `example.config.json` into `config.json`, and fill in the required fields.
 
+Create a file called `.env` and paste in the following lines
+
+```
+WALLET_PRIVATE_KEY="<wallet-private-key>"
+BOT_TOKEN="<bot-token>"
+```
+
 ## Installation
 
 1. If you do not have pnpm, run `npm i -g pnpm`, also install nodemon if you haven't `npm i -g nodemon`

@@ -172,3 +172,8 @@ $RECYCLE.BIN/
 
 # Configuration File
 config.json
+
+# Lock Files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

@@ -3,8 +3,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 const Keyv = require("keyv");
 const { Collection } = require("discord.js");
-const { secrets } = require("./config.json");
 const client = require("./client"); // Get Client
+require("dotenv").config();
 
 // KeyV Creation and Handling
 const keyv = new Keyv();
@@ -47,7 +47,7 @@ for (const file of commandFiles) {
 
 // Login to Bot with token
 try {
-  client.login(secrets.BotToken);
+  client.login(process.env.BOT_TOKEN);
 } catch (error) {
   console.error(`Error login to BOT at index : ${error}`);
 }
