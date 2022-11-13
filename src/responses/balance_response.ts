@@ -1,9 +1,10 @@
 // Returns the balance of the Faucet Account in native Currency or the token passed
 import { channels, networks } from "../config/config.json";
-import getBalance from "../utils/getBalance";
-import getProvider from "../utils/getProvider";
 
-export default async (interaction): Promise<void> => {
+const getBalance = require("../utils/getBalance");
+const getProvider = require("../utils/getProvider");
+
+module.exports = async (interaction): Promise<void> => {
 	// Initial Responce to client
 	await interaction.reply({ content: "👩‍💻 Calculating....", fetchReply: true });
 

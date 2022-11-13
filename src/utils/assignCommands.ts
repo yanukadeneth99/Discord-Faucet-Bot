@@ -7,7 +7,7 @@ import * as dotenv from "dotenv";
 import { bot } from "../config/config.json";
 dotenv.config();
 
-export default async (commands, globally = false): Promise<void> => {
+module.exports = async (commands, globally = false): Promise<void> => {
 	const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
 
 	//* Use for Production (Updates the commands globally)

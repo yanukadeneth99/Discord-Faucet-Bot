@@ -4,9 +4,10 @@
 import { InteractionType } from "discord.js";
 
 import { channels } from "../config/config.json";
-import feedback_handle from "../modals/feedback_handle";
 
-export default {
+const feedback_handle = require("../modals/feedback_handle");
+
+module.exports = {
 	name: "interactionCreate",
 	async execute(keyv: any, client: any, interaction: any) {
 		try {

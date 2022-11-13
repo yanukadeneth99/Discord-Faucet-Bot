@@ -4,13 +4,14 @@ import { EmbedBuilder } from "discord.js";
 import { ethers } from "ethers";
 
 import { channels, networks, stats, tokens } from "../config/config.json";
-import getBalance from "../utils/getBalance";
-import getProvider from "../utils/getProvider";
-import getTxName from "../utils/getTxName";
-import handleRateLimiting from "../utils/handleRateLimiting";
-import transfer from "../utils/transfer";
 
-export default async (keyv, interaction): Promise<void> => {
+const getBalance = require("../utils/getBalance");
+const getProvider = require("../utils/getProvider");
+const getTxName = require("../utils/getTxName");
+const handleRateLimiting = require("../utils/handleRateLimiting");
+const transfer = require("../utils/transfer");
+
+module.exports = async (keyv, interaction): Promise<void> => {
 	// Initial Responce to client
 	await interaction.reply({ content: "🤖 Mining....", fetchReply: true });
 	try {

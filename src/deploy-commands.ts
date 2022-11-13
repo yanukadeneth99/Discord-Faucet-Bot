@@ -4,12 +4,12 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import assignCommands from "./utils/assignCommands";
+const assignCommands = require("./utils/assignCommands");
 
 // Get all commands from the `/commands` folder
 const commands = [];
 const commandsPath = path.join(__dirname, "commands");
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".js"));
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".ts"));
 
 for (const file of commandFiles) {
 	const commandPath = path.join(commandsPath, file);
@@ -17,4 +17,4 @@ for (const file of commandFiles) {
 	commands.push(command.data.toJSON());
 }
 // Pass true to assign commands globally (i.e: assignCommands(commands,true))
-assignCommands(commands);
+assignCommands(commands, true);

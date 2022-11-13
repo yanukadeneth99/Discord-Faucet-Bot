@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 
 import { networks } from "../config/config.json";
 
-export default async (networkName): Promise<ethers.providers.JsonRpcProvider> => {
+module.exports = async (networkName): Promise<ethers.providers.JsonRpcProvider> => {
 	let url = networks[networkName].INFURA_URL ?? networks[networkName].ALCHEMY_URL;
 
 	if (networkName == "celo") {

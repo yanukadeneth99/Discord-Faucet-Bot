@@ -2,7 +2,7 @@
 
 import { channels } from "../config/config.json";
 
-export default async (interaction): Promise<void> => {
+module.exports = async (interaction): Promise<void> => {
 	// Initial Message
 	await interaction.reply({
 		content: "🏃 Getting...",

@@ -4,7 +4,7 @@ import { ActivityType } from "discord.js";
 
 import { channels } from "../config/config.json";
 
-export default {
+module.exports = {
 	name: "ready",
 	once: true,
 	async execute(client: any) {

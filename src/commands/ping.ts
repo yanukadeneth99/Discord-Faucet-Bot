@@ -5,8 +5,7 @@ ADMINS ONLY
 
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
-export default {
-	name: "Info",
+module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("ping")
 		.setDescription("Check the ping of the bot")

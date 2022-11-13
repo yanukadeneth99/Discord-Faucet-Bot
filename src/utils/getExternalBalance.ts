@@ -3,7 +3,7 @@ import { ethers } from "ethers";
 import { stats, tokens } from "../config/config.json";
 import erc20ABI from "../libs/erc20.json";
 
-export default async (provider, tokenName, networkName): Promise<string> => {
+module.exports = async (provider, tokenName, networkName): Promise<string> => {
 	const address = tokens[tokenName][networkName];
 	if (!address) throw Error("Token Address not found!");
 

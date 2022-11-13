@@ -5,7 +5,7 @@
 // Key - String for the Special Key (ex: network, token,etc)
 // Duration - Milliseconds amount (Send from config)
 // Nonce = Pass true for nonce global check
-export default async (
+module.exports = async (
 	keyv,
 	interaction,
 	key,

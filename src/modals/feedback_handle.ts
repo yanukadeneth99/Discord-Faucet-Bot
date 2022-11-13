@@ -3,7 +3,7 @@
 
 import { channels } from "../config/config.json";
 
-export default async (client, interaction): Promise<void> => {
+module.exports = async (client, interaction): Promise<void> => {
 	// Get the Feedback Channel
 	const fdChannel = await client.channels.cache.get(channels.feedback);
 

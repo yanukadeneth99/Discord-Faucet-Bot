@@ -7,8 +7,7 @@ import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 // TODO : Make this object dynamic (Get from config)
 
-export default {
-	name: "Faucet",
+module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("faucet")
 		.setDescription("Claim daily ETH from the faucet")

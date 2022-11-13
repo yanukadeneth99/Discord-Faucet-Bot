@@ -8,7 +8,7 @@ import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 // TODO : Make this object dynamic (Get from config)
 
-export default {
+module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("balance")
 		.setDescription(

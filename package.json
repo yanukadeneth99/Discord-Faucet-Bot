@@ -16,7 +16,8 @@
 		"start:prod": "node dist/index.js",
 		"build": "tsc",
 		"watch": "tsc -w",
-		"bot:addcommands": "node dist/deploy-commands.js"
+		"bot:addcommands": "ts-node src/deploy-commands.ts",
+		"bot:deletecommands": "ts-node src/delete-commands.ts"
 	},
 	"author": "Yanuka Deneth",
 	"license": "MIT",

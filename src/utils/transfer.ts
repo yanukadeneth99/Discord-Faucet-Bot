@@ -9,7 +9,7 @@ import { stats, tokens } from "../config/config.json";
 import erc20ABI from "../libs/erc20.json";
 dotenv.config();
 
-export default async (
+module.exports = async (
 	provider,
 	usrAddress,
 	networkName,

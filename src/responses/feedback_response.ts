@@ -3,9 +3,10 @@
 import { ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } from "discord.js";
 
 import { channels, stats } from "../config/config.json";
-import handleRateLimiting from "../utils/handleRateLimiting";
 
-export default async (keyv, interaction): Promise<void> => {
+const handleRateLimiting = require("../utils/handleRateLimiting");
+
+module.exports = async (keyv, interaction): Promise<void> => {
 	try {
 		// Rate Limiting for non Admins
 		const limit = await handleRateLimiting(
