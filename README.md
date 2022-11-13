@@ -28,12 +28,12 @@ BOT_TOKEN="<bot-token>"
 
 ## TODO Features
 
-- [x] Get the Bot Working
-- [ ]
+-   [x] Get the Bot Working
+-   [ ]
 
 ## Inspired by
 
-- [DJS - Reconlx](https://github.com/reconlx/djs-typescript-handler)
-- [Typescript Faucet Template - AlanRacciatti](https://github.com/AlanRacciatti/FaucetDiscordBot)
-- [Discord Bot Template - KevinNovak](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template)
-- [Discord VSCode - ICrawl](https://github.com/iCrawl/discord-vscode)
+-   [DJS - Reconlx](https://github.com/reconlx/djs-typescript-handler)
+-   [Typescript Faucet Template - AlanRacciatti](https://github.com/AlanRacciatti/FaucetDiscordBot)
+-   [Discord Bot Template - KevinNovak](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template)
+-   [Discord VSCode - ICrawl](https://github.com/iCrawl/discord-vscode)

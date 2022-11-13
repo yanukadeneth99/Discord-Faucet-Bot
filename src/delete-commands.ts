@@ -3,4 +3,4 @@
 const deleteCommands = require("./utils/deleteCommands");
 
 // Pass true to remove all commands globally (i.e : deleteCommands(true))
-deleteCommands();
+deleteCommands(true);

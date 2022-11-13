@@ -17,4 +17,4 @@ for (const file of commandFiles) {
 	commands.push(command.data.toJSON());
 }
 // Pass true to assign commands globally (i.e: assignCommands(commands,true))
-assignCommands(commands, true);
+assignCommands(commands);

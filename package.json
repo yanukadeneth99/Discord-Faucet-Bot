@@ -13,9 +13,8 @@
 		"format:fix": "prettier --write .",
 		"start": "ts-node src/index.ts",
 		"start:dev": "ts-node-dev src/index.ts",
-		"start:prod": "node dist/index.js",
+		"start:prod": "tsc && node dist/deploy-commands.js && node dist/index.js",
 		"build": "tsc",
-		"watch": "tsc -w",
 		"bot:addcommands": "ts-node src/deploy-commands.ts",
 		"bot:deletecommands": "ts-node src/delete-commands.ts"
 	},
