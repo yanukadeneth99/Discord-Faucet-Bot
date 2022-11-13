@@ -25,3 +25,8 @@ BOT_TOKEN="<bot-token>"
 2. Create a new branch
 3. Commit the changes
 4. Yeet the changes
+
+## Inspired by
+
+- [DJS - reconlx](https://github.com/reconlx/djs-typescript-handler)
+- [Typescript Faucet Template - AlanRacciatti](https://github.com/AlanRacciatti/FaucetDiscordBot)
