@@ -3,50 +3,47 @@ Users can use to claim free eth daily per account from the passed network and to
 * Change this if you add more networks/tokens and deploy the commands again using `node deploy-commands`
 */
 
-import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js";
+import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 // TODO : Make this object dynamic (Get from config)
 
 export default {
-  data: new SlashCommandBuilder()
-    .setName("faucet")
-    .setDescription("Claim daily ETH from the faucet")
-    .setDMPermission(false)
-    .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
-    .addStringOption((option) =>
-      option
-        .setName("address")
-        .setDescription("Type your wallet address")
-        .setRequired(true)
-    )
-    .addStringOption((option) =>
-      option
-        .setName("network")
-        .setDescription("Select the network")
-        .setRequired(true)
-        .addChoices(
-          {
-            name: "Goerli",
-            value: "goerli",
-          },
-          {
-            name: "Rinkeby",
-            value: "rinkeby",
-          },
-          {
-            name: "Mumbai",
-            value: "mumbai",
-          }
-        )
-    )
-    .addStringOption((option) =>
-      option
-        .setName("token")
-        .setDescription("Select the token if applicable")
-        .setRequired(false)
-        .addChoices({
-          name: "LINK",
-          value: "link",
-        })
-    ),
+	data: new SlashCommandBuilder()
+		.setName("faucet")
+		.setDescription("Claim daily ETH from the faucet")
+		.setDMPermission(false)
+		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
+		.addStringOption(option =>
+			option.setName("address").setDescription("Type your wallet address").setRequired(true)
+		)
+		.addStringOption(option =>
+			option
+				.setName("network")
+				.setDescription("Select the network")
+				.setRequired(true)
+				.addChoices(
+					{
+						name: "Goerli",
+						value: "goerli",
+					},
+					{
+						name: "Rinkeby",
+						value: "rinkeby",
+					},
+					{
+						name: "Mumbai",
+						value: "mumbai",
+					}
+				)
+		)
+		.addStringOption(option =>
+			option
+				.setName("token")
+				.setDescription("Select the token if applicable")
+				.setRequired(false)
+				.addChoices({
+					name: "LINK",
+					value: "link",
+				})
+		),
 };

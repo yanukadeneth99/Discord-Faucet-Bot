@@ -6,19 +6,14 @@
 	"engines": {
 		"node": ">=16.9.0"
 	},
-	"type": "module",
-	"exports": [
-		"./dist/start-bot.js",
-		"./dist/start-manager.js"
-	],
 	"scripts": {
 		"lint": "eslint . --cache --ext .js,.jsx,.ts,.tsx",
 		"lint:fix": "eslint . --fix --cache --ext .js,.jsx,.ts,.tsx",
 		"format": "prettier --check .",
 		"format:fix": "prettier --write .",
-		"start": "ts-node src/index.ts",
 		"start:dev": "ts-node-dev src/index.ts",
 		"start:prod": "node dist/index.js",
+		"bot:addcommands" : "node dist/deploy-commands.js",
 		"build": "tsc",
 		"watch": "tsc -w"
 	},

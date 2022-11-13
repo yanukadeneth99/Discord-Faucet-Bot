@@ -2,26 +2,27 @@
 
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord.js";
-import { bot } from "../config/config.json";
 import * as dotenv from "dotenv";
-dotenv.config();
 
-export default async (commands, globally = false) => {
-  const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
+import { bot } from "../config/config.json";
+dotenv.config({ path: "../../.env" });
 
-  //* Use for Production (Updates the commands globally)
-  if (globally) {
-    await rest.put(Routes.applicationCommands(bot.clientId), {
-      body: commands,
-    });
-    console.log("Successfully registered commands globally");
-    return;
-  }
+export default async (commands, globally = false): Promise<void> => {
+	const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
 
-  //* Use for Development (Updates only the passed guild data)
-  await rest.put(Routes.applicationGuildCommands(bot.clientId, bot.guildId), {
-    body: commands,
-  });
-  console.log("Successfully registered commands to the guild server");
-  return;
+	//* Use for Production (Updates the commands globally)
+	if (globally) {
+		await rest.put(Routes.applicationCommands(bot.clientId), {
+			body: commands,
+		});
+		console.log("Successfully registered commands globally");
+		return;
+	}
+
+	//* Use for Development (Updates only the passed guild data)
+	await rest.put(Routes.applicationGuildCommands(bot.clientId, bot.guildId), {
+		body: commands,
+	});
+	console.log("Successfully registered commands to the guild server");
+	return;
 };
