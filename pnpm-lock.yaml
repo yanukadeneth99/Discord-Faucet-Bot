@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@celo-tools/celo-ethers-wrapper': ^0.3.0
   '@discordjs/rest': ^1.0.1
   '@types/glob': ^8.0.0
   '@types/node': ^18.11.9
@@ -21,6 +22,7 @@ specifiers:
   typescript: ^4.8.4
 
 dependencies:
+  '@celo-tools/celo-ethers-wrapper': 0.3.0_ethers@5.7.0
   '@discordjs/rest': 1.0.1
   discord-api-types: 0.37.3
   discord.js: 14.2.0
@@ -64,6 +66,15 @@ packages:
       chalk: 2.4.2
       js-tokens: 4.0.0
     dev: true
+
+  /@celo-tools/celo-ethers-wrapper/0.3.0_ethers@5.7.0:
+    resolution: {integrity: sha512-qJgVQ3EeVYzM0uvGcVxPB4cH8BaEnoLMyG8k/gAWzSCjJFIgNTlRs05IFGzAb7U0GlbDKCDSualHSGMXq+OHEw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      ethers: ^5
+    dependencies:
+      ethers: 5.7.0
+    dev: false
 
   /@cspotcode/source-map-support/0.8.1:
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}

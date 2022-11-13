@@ -31,6 +31,7 @@
 		"learnweb3"
 	],
 	"dependencies": {
+		"@celo-tools/celo-ethers-wrapper": "^0.3.0",
 		"@discordjs/rest": "^1.0.1",
 		"discord-api-types": "^0.37.3",
 		"discord.js": "^14.2.0",
