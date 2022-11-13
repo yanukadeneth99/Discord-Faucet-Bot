@@ -5,7 +5,7 @@ import { Routes } from "discord.js";
 import * as dotenv from "dotenv";
 
 import { bot } from "../config/config.json";
-dotenv.config({ path: "../../.env" });
+dotenv.config();
 
 export default async (globally = false): Promise<void> => {
 	const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);

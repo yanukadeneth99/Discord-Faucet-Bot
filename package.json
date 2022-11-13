@@ -11,11 +11,12 @@
 		"lint:fix": "eslint . --fix --cache --ext .js,.jsx,.ts,.tsx",
 		"format": "prettier --check .",
 		"format:fix": "prettier --write .",
+		"start": "ts-node src/index.ts",
 		"start:dev": "ts-node-dev src/index.ts",
 		"start:prod": "node dist/index.js",
-		"bot:addcommands" : "node dist/deploy-commands.js",
 		"build": "tsc",
-		"watch": "tsc -w"
+		"watch": "tsc -w",
+		"bot:addcommands": "node dist/deploy-commands.js"
 	},
 	"author": "Yanuka Deneth",
 	"license": "MIT",

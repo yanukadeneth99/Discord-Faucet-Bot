@@ -6,6 +6,7 @@ ADMINS ONLY
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default {
+	name: "Info",
 	data: new SlashCommandBuilder()
 		.setName("info")
 		.setDescription("Get info about a user or the server")

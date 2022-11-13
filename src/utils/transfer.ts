@@ -7,7 +7,7 @@ import { ethers } from "ethers";
 
 import { stats, tokens } from "../config/config.json";
 import erc20ABI from "../libs/erc20.json";
-dotenv.config({ path: "../../.env" });
+dotenv.config();
 
 export default async (
 	provider,

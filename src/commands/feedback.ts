@@ -6,6 +6,7 @@ Rate limited
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 
 export default {
+	name: "Feedback",
 	data: new SlashCommandBuilder()
 		.setName("feedback")
 		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
