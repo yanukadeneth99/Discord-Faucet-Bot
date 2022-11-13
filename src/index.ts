@@ -4,14 +4,16 @@ const path = require("node:path");
 const Keyv = require("keyv");
 const { Collection } = require("discord.js");
 const client = require("./client"); // Get Client
-require("dotenv").config();
+require("dotenv").config({ path: "../.env" });
 
 // KeyV Creation and Handling
 const keyv = new Keyv();
 keyv.on("error", (err) => {
   console.error("Keyv connection error:", err);
-  throw new Error("Error KEYV: ", err);
+  throw new Error("Error KEYV: " + err);
 });
+
+// TODO Create Database Connection here
 
 // Run the Events
 const eventsPath = path.join(__dirname, "events");

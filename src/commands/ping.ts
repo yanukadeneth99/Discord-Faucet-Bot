@@ -3,9 +3,9 @@ Prints the Ping of the BOT
 ADMINS ONLY
 */
 
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js";
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("ping")
     .setDescription("Check the ping of the bot")

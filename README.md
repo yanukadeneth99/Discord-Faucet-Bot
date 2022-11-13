@@ -26,7 +26,14 @@ BOT_TOKEN="<bot-token>"
 3. Commit the changes
 4. Yeet the changes
 
+## TODO Features
+
+- [x] Get the Bot Working
+- [ ]
+
 ## Inspired by
 
-- [DJS - reconlx](https://github.com/reconlx/djs-typescript-handler)
+- [DJS - Reconlx](https://github.com/reconlx/djs-typescript-handler)
 - [Typescript Faucet Template - AlanRacciatti](https://github.com/AlanRacciatti/FaucetDiscordBot)
+- [Discord Bot Template - KevinNovak](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template)
+- [Discord VSCode - ICrawl](https://github.com/iCrawl/discord-vscode)

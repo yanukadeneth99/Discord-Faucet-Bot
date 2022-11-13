@@ -6,7 +6,7 @@ const { stats, tokens } = require("../config.json");
 const erc20ABI = require("../libs/erc20.json");
 require("dotenv").config();
 
-module.exports = async (provider, usrAddress, networkName, tokenName) => {
+export default async (provider, usrAddress, networkName, tokenName?: any) => {
   // Create a wallet instance
   const wallet = new ethers.Wallet(process.env.WALLET_PRIVATE_KEY, provider);
 

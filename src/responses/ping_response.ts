@@ -1,8 +1,8 @@
 // Responds user with the ping of the bot
 
-const { channels } = require("../config.json");
+import { channels } from "../config/config.json";
 
-module.exports = async (interaction) => {
+export default async (interaction) => {
   // Initial Message
   const sent = await interaction.reply({
     content: "✈️ Pinging...",

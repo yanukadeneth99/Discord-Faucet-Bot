@@ -1,11 +1,12 @@
 // Used at deploy-commands.js to deploy the commands into the BOT
 
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord.js");
-const { bot } = require("../config.json");
-require("dotenv").config();
+import { REST } from "@discordjs/rest";
+import { Routes } from "discord.js";
+import { bot } from "../config/config.json";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-module.exports = async (commands, globally = false) => {
+export default async (commands, globally = false) => {
   const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
 
   //* Use for Production (Updates the commands globally)

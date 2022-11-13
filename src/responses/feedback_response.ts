@@ -1,15 +1,15 @@
 // Responds the user by building a Form
 
-const {
+import {
   ActionRowBuilder,
   ModalBuilder,
   TextInputBuilder,
   TextInputStyle,
-} = require("discord.js");
-const handleRateLimiting = require("../utils/handleRateLimiting");
-const { channels, stats } = require("../config.json");
+} from "discord.js";
+import handleRateLimiting from "../utils/handleRateLimiting";
+import { channels, stats } from "../config/config.json";
 
-module.exports = async (keyv, interaction) => {
+export default async (keyv, interaction) => {
   try {
     // Rate Limiting for non Admins
     const limit = await handleRateLimiting(
@@ -51,8 +51,10 @@ module.exports = async (keyv, interaction) => {
 
     // An action row only holds one text input,
     // so you need one action row per text input.
-    const firstActionRow = new ActionRowBuilder().addComponents(subject);
-    const secondActionRow = new ActionRowBuilder().addComponents(description);
+    const firstActionRow =
+      new ActionRowBuilder<TextInputBuilder>().addComponents(subject);
+    const secondActionRow =
+      new ActionRowBuilder<TextInputBuilder>().addComponents(description);
 
     // Add inputs to the modal
     modal.addComponents(firstActionRow, secondActionRow);

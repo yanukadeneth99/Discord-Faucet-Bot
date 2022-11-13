@@ -1,7 +1,7 @@
-const ethers = require("ethers");
-const { networks } = require("../config.json");
+import ethers from "ethers";
+import { networks } from "../config.json";
 
-module.exports = (networkName) => {
+export default (networkName) => {
   let url =
     networks[networkName].INFURA_URL ?? networks[networkName].ALCHEMY_URL;
 

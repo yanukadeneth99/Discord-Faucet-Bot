@@ -1,15 +1,15 @@
 // Transfers the set dailyEth value to the requested user.
 // Rate limited to daily
-const ethers = require("ethers");
-const { EmbedBuilder } = require("discord.js");
-const getProvider = require("../utils/getProvider");
-const getBalance = require("../utils/getBalance");
-const transfer = require("../utils/transfer");
-const getTxName = require("../utils/getTxName");
-const handleRateLimiting = require("../utils/handleRateLimiting");
-const { stats, networks, tokens, channels } = require("../config.json");
+import ethers from "ethers";
+import { EmbedBuilder } from "discord.js";
+import getProvider from "../utils/getProvider";
+import getBalance from "../utils/getBalance";
+import transfer from "../utils/transfer";
+import getTxName from "../utils/getTxName";
+import handleRateLimiting from "../utils/handleRateLimiting";
+import { stats, networks, tokens, channels } from "../config/config.json";
 
-module.exports = async (keyv, interaction) => {
+export default async (keyv, interaction) => {
   // Initial Responce to client
   await interaction.reply({ content: "🤖 Mining....", fetchReply: true });
   try {

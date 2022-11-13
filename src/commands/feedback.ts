@@ -3,9 +3,9 @@ Users can pass feedback which will be printed in a feedback discord channel.
 Rate limited
 */
 
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js";
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("feedback")
     .setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)

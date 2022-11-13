@@ -1,8 +1,8 @@
 // Replies with either user info or server info
 
-const { channels } = require("../config.json");
+import { channels } from "../config/config.json";
 
-module.exports = async (interaction) => {
+export default async (interaction) => {
   // Initial Message
   await interaction.reply({
     content: "🏃 Getting...",

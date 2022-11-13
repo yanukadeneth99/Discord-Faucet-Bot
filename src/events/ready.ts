@@ -1,9 +1,9 @@
 // Log Printing and setting Discord Presence when the BOT wakes
 
-const { channels } = require("../config.json");
-const { ActivityType } = require("discord.js");
+import { channels } from "../config/config.json";
+import { ActivityType } from "discord.js";
 
-module.exports = {
+export default {
   name: "ready",
   once: true,
   async execute(client) {
@@ -14,7 +14,7 @@ module.exports = {
       });
       client.user.setStatus("online");
 
-      //Morning Print of Waking Up
+      // Morning Print of Waking Up
       const logchannel = await client.channels.cache.get(channels.log);
       logchannel.send(
         `[LOGIN/RESTART]\n${new Date(

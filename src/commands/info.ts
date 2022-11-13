@@ -3,9 +3,9 @@ Replies the user with user information or server information
 ADMINS ONLY
 */
 
-const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
+import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js";
 
-module.exports = {
+export default {
   data: new SlashCommandBuilder()
     .setName("info")
     .setDescription("Get info about a user or the server")

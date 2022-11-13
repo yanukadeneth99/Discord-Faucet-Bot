@@ -1,11 +1,12 @@
 // Used at delete-commands.js to delete all the commands in the BOT
 
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord.js");
-const { bot } = require("../config.json");
-require("dotenv").config();
+import { REST } from "@discordjs/rest";
+import { Routes } from "discord.js";
+import { bot } from "../config.json";
+import * as dotenv from "dotenv";
+dotenv.config();
 
-module.exports = async (globally = false) => {
+export default async (globally = false) => {
   const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
 
   //! Removes the commands globally

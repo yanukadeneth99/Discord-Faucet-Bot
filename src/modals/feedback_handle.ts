@@ -1,9 +1,9 @@
 // Used in InteractionCreate.js to handle Feedback submission
 // Data from the modal is printed in the feedback channel
 
-const { channels } = require("../config.json");
+import { channels } from "../config/config.json";
 
-module.exports = async (client, interaction) => {
+export default async (client, interaction) => {
   // Get the Feedback Channel
   const fdChannel = await client.channels.cache.get(channels.feedback);
 

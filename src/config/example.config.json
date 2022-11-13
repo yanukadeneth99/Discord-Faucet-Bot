@@ -34,6 +34,7 @@
   "stats": {
     "walletAddress": "xxxxxxxx",
     "dailyEth": 1,
+    "database": "keyv",
     "maxFee": 95000000000,
     "coolDownTime": 120000,
     "feedbackCoolDown": 200000,

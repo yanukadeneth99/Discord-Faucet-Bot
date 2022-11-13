@@ -1,11 +1,11 @@
 //* Handles all kinds of interactions
 // Add all new commands build to here
 
-const { InteractionType } = require("discord.js");
-const { channels } = require("../config.json");
-const feedback_handle = require("../modals/feedback_handle");
+import { InteractionType } from "discord.js";
+import { channels } from "../config/config.json";
+import feedback_handle from "../modals/feedback_handle";
 
-module.exports = {
+export default {
   name: "interactionCreate",
   async execute(keyv, client, interaction) {
     try {

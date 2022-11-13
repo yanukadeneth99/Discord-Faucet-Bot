@@ -1,8 +1,8 @@
-const ethers = require("ethers");
-const erc20ABI = require("../libs/erc20.json");
-const { tokens, stats } = require("../config.json");
+import ethers from "ethers";
+import erc20ABI from "../libs/erc20.json";
+import { tokens, stats } from "../config.json";
 
-module.exports = async (provider, tokenName, networkName) => {
+export default async (provider, tokenName, networkName) => {
   const address = tokens[tokenName][networkName];
   if (!address) throw Error("Token Address not found!");
 
