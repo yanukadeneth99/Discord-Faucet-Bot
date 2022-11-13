@@ -9,7 +9,7 @@ const assignCommands = require("./utils/assignCommands");
 // Get all commands from the `/commands` folder
 const commands = [];
 const commandsPath = path.join(__dirname, "commands");
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".ts"));
+const commandFiles = fs.readdirSync(commandsPath);
 
 for (const file of commandFiles) {
 	const commandPath = path.join(commandsPath, file);

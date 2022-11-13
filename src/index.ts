@@ -19,7 +19,7 @@ keyv.on("error", (err?: Error) => {
 
 // Run the Events
 const eventsPath = path.join(__dirname, "events");
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith(".ts"));
+const eventFiles = fs.readdirSync(eventsPath);
 
 for (const file of eventFiles) {
 	const ePath = path.join(eventsPath, file);
@@ -35,7 +35,7 @@ for (const file of eventFiles) {
 
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith(".ts"));
+const commandFiles = fs.readdirSync(commandsPath);
 
 for (const file of commandFiles) {
 	const filePath = path.join(commandsPath, file);
