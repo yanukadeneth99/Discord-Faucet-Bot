@@ -27,7 +27,7 @@ for (const file of eventFiles) {
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
-		client.on(event.dname, (...args) => event.execute(keyv, client, ...args));
+		client.on(event.name, (...args) => event.execute(keyv, client, ...args));
 	}
 }
 

@@ -8,7 +8,11 @@ import erc20ABI from "../libs/erc20.json";
 
 // TODO :  Specify the actual value than any
 
-module.exports = async (provider, tokenName?: any, networkName?: any): Promise<string> => {
+module.exports = async (
+	provider: ethers.providers.JsonRpcProvider,
+	tokenName?: any,
+	networkName?: any
+): Promise<string> => {
 	//* Token Balance (ERC20)
 	if (tokenName && networkName) {
 		const address = tokens[tokenName][networkName];

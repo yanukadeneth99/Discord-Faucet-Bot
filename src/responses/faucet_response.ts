@@ -30,7 +30,7 @@ module.exports = async (keyv, interaction): Promise<void> => {
 		}
 
 		// Get the Provider based on the network
-		const provider = getProvider(networkName);
+		const provider = await getProvider(networkName);
 
 		//* Native Transfer (No Token)
 		if (tokenName == networks[networkName].nativeCurrency) {

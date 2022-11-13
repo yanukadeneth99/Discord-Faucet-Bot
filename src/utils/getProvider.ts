@@ -3,14 +3,15 @@ import { ethers } from "ethers";
 
 import { networks } from "../config/config.json";
 
-module.exports = async (networkName): Promise<ethers.providers.JsonRpcProvider> => {
-	let url = networks[networkName].INFURA_URL ?? networks[networkName].ALCHEMY_URL;
+module.exports = async (networkName: string): Promise<ethers.providers.JsonRpcProvider> => {
+	let url: string = networks[networkName].INFURA_URL ?? networks[networkName].ALCHEMY_URL;
 
 	if (networkName == "celo") {
 		const provider = new CeloProvider("https://alfajores-forno.celo-testnet.org");
 		await provider.ready;
 		return provider;
 	}
-
-	return new ethers.providers.JsonRpcProvider(url);
+	const provider = new ethers.providers.JsonRpcProvider(url);
+	await provider.ready;
+	return provider;
 };

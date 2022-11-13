@@ -17,7 +17,7 @@ module.exports = async (interaction): Promise<void> => {
 			interaction.options.getString("token") ?? networks[networkName].nativeCurrency;
 
 		// Get the Provider based on the network
-		const provider = getProvider(networkName);
+		const provider = await getProvider(networkName);
 
 		if (networks[networkName].nativeCurrency == tokenName) {
 			//* Token not passed or native Currency (No ERC20 tokens)
