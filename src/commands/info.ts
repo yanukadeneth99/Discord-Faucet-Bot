@@ -1,6 +1,7 @@
 /* 
-Replies the user with user information or server information
-ADMINS ONLY
+* Replies the user with user information or server information
+If you change this, make sure to run `pnpm bot:deletecommands && pnpm bot:addcommands`
+! ADMINS ONLY
 */
 
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";

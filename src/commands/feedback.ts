@@ -1,6 +1,7 @@
 /* 
-Users can pass feedback which will be printed in a feedback discord channel.
-Rate limited
+* Users can pass feedback which will be printed in a feedback discord channel.
+If you change this, make sure to run `pnpm bot:deletecommands && pnpm bot:addcommands`
+! Rate limited
 */
 
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";

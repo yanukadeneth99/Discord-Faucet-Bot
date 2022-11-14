@@ -1,6 +1,7 @@
 /* 
-Prints the Ping of the BOT
-ADMINS ONLY
+* Prints the Ping of the BOT
+If you change this, make sure to run `pnpm bot:deletecommands && pnpm bot:addcommands`
+! ADMINS ONLY
 */
 
 import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
