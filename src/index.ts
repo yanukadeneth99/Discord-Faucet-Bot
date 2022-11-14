@@ -6,6 +6,8 @@ import fs from "node:fs";
 import path from "node:path";
 
 import client from "./client"; // Get Client
+import { InitializeDb } from "./database";
+
 dotenv.config();
 
 // KeyV Creation and Handling
@@ -41,6 +43,9 @@ for (const file of commandFiles) {
 	// With the key as the command name and the value as the exported module
 	client.commands.set(command.data.name, command);
 }
+
+// Database Connection
+InitializeDb();
 
 // Login to Bot with token
 try {

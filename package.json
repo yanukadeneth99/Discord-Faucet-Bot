@@ -33,7 +33,10 @@
 		"discord.js": "^14.6.0",
 		"dotenv": "^16.0.3",
 		"ethers": "^5.7.2",
-		"keyv": "^4.5.2"
+		"keyv": "^4.5.2",
+		"pg": "^8.8.0",
+		"reflect-metadata": "^0.1.13",
+		"typeorm": "^0.3.10"
 	},
 	"devDependencies": {
 		"@types/glob": "^8.0.0",
