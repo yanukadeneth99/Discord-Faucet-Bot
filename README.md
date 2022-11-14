@@ -11,6 +11,8 @@ Create a file called `.env` and paste in the following lines. Make sure to fill 
 ```
 WALLET_PRIVATE_KEY="<wallet-private-key>"
 BOT_TOKEN="<bot-token>"
+DB_USERNAME="<username>"
+DB_PASSWORD="<password>"
 ```
 
 ## Installation
@@ -67,4 +69,3 @@ Adding Networks or Tokens are fairly straighforward.
 -   [DJS - Reconlx](https://github.com/reconlx/djs-typescript-handler)
 -   [Typescript Faucet Template - AlanRacciatti](https://github.com/AlanRacciatti/FaucetDiscordBot)
 -   [Discord Bot Template - KevinNovak](https://github.com/KevinNovak/Discord-Bot-TypeScript-Template)
--   [Discord VSCode - ICrawl](https://github.com/iCrawl/discord-vscode)

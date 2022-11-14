@@ -9,7 +9,7 @@ import { channels, stats, tokens } from "../config/config.json";
 const getBalance = require("../utils/getBalance");
 const getProvider = require("../utils/getProvider");
 const getTxName = require("../utils/getTxName");
-const handleRateLimiting = require("../utils/handleRateLimiting");
+const { getTimer, setTimer } = require("../utils/handleRateLimiting");
 const transfer = require("../utils/transfer");
 
 module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): Promise<void> => {
@@ -46,13 +46,9 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 			}
 
 			// Rate Limiting for nonce
-			const nonceLimit = (await handleRateLimiting(
-				interaction,
-				networkName,
-				stats.globalCoolDown,
-				true,
-				keyv
-			)) as number | undefined;
+			const nonceLimit = (await getTimer(interaction, networkName, true, keyv)) as
+				| number
+				| undefined;
 			if (nonceLimit) {
 				const timeLeft = Math.floor(
 					(stats.globalCoolDown - (Date.now() - nonceLimit)) / 1000
@@ -64,19 +60,15 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 			}
 
 			// Rate Limiting for non Admins
-			const limit = (await handleRateLimiting(
-				interaction,
-				networkName,
-				stats.coolDownTime,
-				false,
-				keyv
-			)) as number | undefined;
+			const limit = (await getTimer(interaction, networkName, false, keyv)) as
+				| number
+				| undefined;
 			if (limit) {
 				const timeLeft = Math.floor((stats.coolDownTime - (Date.now() - limit)) / 1000);
 				await interaction.editReply(`😎 Cool people waits for ${timeLeft} seconds`);
 				return;
 			} else {
-				await keyv.set(`${networkName}`, Date.now());
+				await setTimer(interaction, networkName, true, keyv);
 			}
 
 			// Transaction
@@ -97,7 +89,7 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 				embeds: [embed],
 			});
 			await tx.wait();
-			await keyv.set(`${interaction.user.id}:${networkName}`, Date.now());
+			await setTimer(interaction, networkName, false, keyv);
 		}
 		//* Non Native Transfer (ERC-20)
 		else {
@@ -131,13 +123,9 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 			}
 
 			// Rate Limiting for nonce
-			const nonceLimit = (await handleRateLimiting(
-				interaction,
-				networkName,
-				stats.globalCoolDown,
-				true,
-				keyv
-			)) as number | undefined;
+			const nonceLimit = (await getTimer(interaction, networkName, true, keyv)) as
+				| number
+				| undefined;
 			if (nonceLimit) {
 				const timeLeft = Math.floor(
 					(stats.globalCoolDown - (Date.now() - nonceLimit)) / 1000
@@ -149,19 +137,15 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 			}
 
 			// Rate Limiting for non Admins
-			const limit = (await handleRateLimiting(
-				interaction,
-				tokenName,
-				stats.coolDownTime,
-				false,
-				keyv
-			)) as number | undefined;
+			const limit = (await getTimer(interaction, tokenName, false, keyv)) as
+				| number
+				| undefined;
 			if (limit) {
 				const timeLeft = Math.floor((stats.coolDownTime - (Date.now() - limit)) / 1000);
 				await interaction.editReply(`😎 Cool people waits for ${timeLeft} seconds`);
 				return;
 			} else {
-				await keyv.set(`${networkName}`, Date.now());
+				await setTimer(interaction, tokenName, true, keyv);
 			}
 
 			// Transaction
@@ -183,7 +167,7 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 				embeds: [embed],
 			});
 			await tx.wait();
-			await keyv.set(`${interaction.user.id}:${tokenName}`, Date.now());
+			await setTimer(interaction, tokenName, false, keyv);
 		}
 
 		// Transfer Success

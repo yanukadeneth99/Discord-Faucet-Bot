@@ -45,5 +45,10 @@
 		"coolDownTime": 120000,
 		"feedbackCoolDown": 200000,
 		"globalCoolDown": 60000
+	},
+	"database": {
+		"host": "x",
+		"port": 9000,
+		"database": "db"
 	}
 }

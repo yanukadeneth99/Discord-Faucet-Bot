@@ -5,6 +5,8 @@ declare global {
 		interface ProcessEnv {
 			WALLET_PRIVATE_KEY: string;
 			BOT_TOKEN: string;
+			DB_USERNAME: string;
+			DB_PASSWORD: string;
 		}
 	}
 }
