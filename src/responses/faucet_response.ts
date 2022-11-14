@@ -1,4 +1,5 @@
-// Transfers the set dailyEth value to the requested user.
+//* Transfers the set dailyEth value to the requested user.
+
 import { ChatInputCommandInteraction, EmbedBuilder, TextChannel } from "discord.js";
 import { ethers } from "ethers";
 import Keyv from "keyv";

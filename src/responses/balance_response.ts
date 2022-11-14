@@ -1,4 +1,5 @@
-// Returns the balance of the Faucet Account in native Currency or the token passed
+//* Returns the balance of the Faucet Account in native Currency or the token passed
+
 import { ChatInputCommandInteraction, TextChannel } from "discord.js";
 import { ethers } from "ethers";
 

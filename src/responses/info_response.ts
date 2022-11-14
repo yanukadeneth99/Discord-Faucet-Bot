@@ -1,8 +1,10 @@
-// Replies with either user info or server info
+//* Replies with either user info or server info
+
+import { ChatInputCommandInteraction, TextChannel } from "discord.js";
 
 import { channels } from "../config/config.json";
 
-module.exports = async (interaction): Promise<void> => {
+module.exports = async (interaction: ChatInputCommandInteraction): Promise<void> => {
 	// Initial Message
 	await interaction.reply({
 		content: "🏃 Getting...",
@@ -30,11 +32,8 @@ module.exports = async (interaction): Promise<void> => {
 		}
 	} catch (error) {
 		console.error(`Error Getting Info : ${error}`);
-		const errorchannel = await interaction.client.channels.cache.get(channels.error);
+		const errorchannel = interaction.client.channels.cache.get(channels.error) as TextChannel;
 		errorchannel.send(`[ERROR]\n${new Date(Date.now()).toUTCString()}\nGettng Into\n${error}`);
-		await interaction.editReply({
-			content: "🙇‍♂️ Error, please try again later",
-			ephemeral: true,
-		});
+		await interaction.editReply("🙇‍♂️ Error, please try again later");
 	}
 };

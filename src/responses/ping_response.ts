@@ -1,8 +1,10 @@
-// Responds user with the ping of the bot
+//* Responds user with the ping of the bot
+
+import { CommandInteraction, TextChannel } from "discord.js";
 
 import { channels } from "../config/config.json";
 
-module.exports = async (interaction): Promise<void> => {
+module.exports = async (interaction: CommandInteraction): Promise<void> => {
 	// Initial Message
 	const sent = await interaction.reply({
 		content: "✈️ Pinging...",
@@ -17,13 +19,10 @@ module.exports = async (interaction): Promise<void> => {
 		);
 	} catch (error) {
 		console.error(`Error Getting Ping Response : ${error}`);
-		const errorchannel = await interaction.client.channels.cache.get(channels.error);
+		const errorchannel = interaction.client.channels.cache.get(channels.error) as TextChannel;
 		errorchannel.send(
 			`[ERROR]\n${new Date(Date.now()).toUTCString()}\nGetting Ping Response\n${error}`
 		);
-		await interaction.editReply({
-			content: "🙇‍♂️ Error, please try again later",
-			ephemeral: true,
-		});
+		await interaction.editReply("🙇‍♂️ Error, please try again later");
 	}
 };
