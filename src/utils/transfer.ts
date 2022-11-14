@@ -10,9 +10,9 @@ import erc20ABI from "../libs/erc20.json";
 dotenv.config();
 
 module.exports = async (
-	provider,
-	usrAddress,
-	networkName,
+	provider: ethers.providers.JsonRpcProvider,
+	usrAddress: string,
+	networkName: string,
 	tokenName?: any
 ): Promise<ethers.providers.TransactionResponse> => {
 	// Create a wallet instance
@@ -24,10 +24,12 @@ module.exports = async (
 		wallet = new ethers.Wallet(process.env.WALLET_PRIVATE_KEY, provider);
 	}
 
+	if (!wallet) throw new Error("Wallet Construction Failed!");
+
 	//* Native Transfer
 	if (!tokenName) {
 		const nonce = await provider.getTransactionCount(stats.walletAddress); // Get the latest nonce
-		let txObj; // Holds the Transation Object
+		let txObj: ethers.providers.TransactionRequest; // Holds the Transation Object
 
 		if (networkName == "mumbai") {
 			//* Polygon Network
@@ -55,14 +57,28 @@ module.exports = async (
 	}
 	//* Token Transfer (ERC20)
 	else {
+		let address: string;
+		let amount: string;
+
+		// Get the Address from the Token List
+		for (let i = 0; i < tokens.length; i++) {
+			if (tokens[i].name == tokenName) {
+				address = tokens[i][networkName];
+				amount = tokens[i].amount.toString();
+				break;
+			}
+		}
+
+		if (!address) throw new Error("Address not Set to Transfer!");
+
 		// Create contract and get decimals
-		const contract = new ethers.Contract(tokens[tokenName][networkName], erc20ABI, wallet);
+		const contract = new ethers.Contract(address, erc20ABI, wallet);
 		// const decimals = await contract.decimals();
 
 		// Create Transaction object
 		return (await contract.transfer(
 			usrAddress,
-			ethers.utils.parseEther(tokens[tokenName].amount.toString())
+			ethers.utils.parseEther(amount)
 		)) as ethers.providers.TransactionResponse;
 	}
 };

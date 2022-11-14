@@ -1,5 +1,6 @@
 // Returns the balance of the Faucet Account in native Currency or the token passed
 import { ChatInputCommandInteraction, TextChannel } from "discord.js";
+import { ethers } from "ethers";
 
 import { channels, networks, tokens } from "../config/config.json";
 
@@ -20,7 +21,7 @@ module.exports = async (interaction: ChatInputCommandInteraction): Promise<void>
 		let suffix: string;
 
 		// Get the Provider based on the network
-		const provider = await getProvider(networkName);
+		const provider = (await getProvider(networkName)) as ethers.providers.JsonRpcProvider;
 
 		if (!tokenName) {
 			//* Token not passed or native Currency (No ERC20 tokens)
