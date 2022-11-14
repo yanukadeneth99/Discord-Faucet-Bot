@@ -1,4 +1,4 @@
-// Used at deploy-commands.js to deploy the commands into the BOT
+//* Used at deploy-commands.js to deploy the commands into the BOT
 
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord.js";
@@ -7,7 +7,7 @@ import * as dotenv from "dotenv";
 import { bot } from "../config/config.json";
 dotenv.config();
 
-module.exports = async (commands, globally = false): Promise<void> => {
+module.exports = async (commands: any[], globally = false): Promise<void> => {
 	const rest = new REST({ version: "10" }).setToken(process.env.BOT_TOKEN);
 
 	//* Use for Production (Updates the commands globally)

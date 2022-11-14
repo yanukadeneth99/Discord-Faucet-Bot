@@ -6,6 +6,8 @@ import Keyv = require("keyv");
 
 import { stats } from "../config/config.json";
 
+// TODO : Setup Postgres DB
+
 // Key - String for the Special Key (ex: network, token,etc)
 // Duration - Milliseconds amount (Send from config)
 // Nonce = Pass true for nonce global check

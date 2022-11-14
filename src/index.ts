@@ -15,8 +15,6 @@ keyv.on("error", (err?: Error) => {
 	throw new Error("Error KEYV: " + err.message);
 });
 
-// TODO Create Database Connection here
-
 // Run the Events
 const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs.readdirSync(eventsPath);
@@ -32,7 +30,6 @@ for (const file of eventFiles) {
 }
 
 // Gets all command files, and sets them
-
 client.commands = new Collection();
 const commandsPath = path.join(__dirname, "commands");
 const commandFiles = fs.readdirSync(commandsPath);

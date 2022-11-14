@@ -1,8 +1,18 @@
-// Used in Faucet_response.js to display the transaction hash link
+//* Used in Faucet_response.js to display the transaction hash link
 
-module.exports = async (networkName): Promise<string> => {
-	if (networkName == "mumbai") {
-		return `https://${networkName}.polygonscan.com/tx/`;
+import { networks } from "../config/config.json";
+
+module.exports = (networkName: string): string => {
+	let url: string;
+
+	for (let i = 0; i < networks.length; i++) {
+		if (networkName == networks[i].name) {
+			url = networks[i].scan;
+			break;
+		}
 	}
-	return `https://${networkName}.etherscan.io/tx/`;
+
+	if (!url) throw new Error("Scan Link not set for the Network");
+
+	return url;
 };

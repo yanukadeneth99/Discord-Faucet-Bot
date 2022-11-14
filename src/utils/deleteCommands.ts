@@ -1,4 +1,4 @@
-// Used at delete-commands.js to delete all the commands in the BOT
+//* Used at delete-commands.js to delete all the commands in the BOT
 
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord.js";

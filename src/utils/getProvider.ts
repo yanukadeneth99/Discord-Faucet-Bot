@@ -1,4 +1,4 @@
-// Returns the Provider or throws an Error if not found
+//* Returns the Provider or throws an Error if not found
 
 import { CeloProvider } from "@celo-tools/celo-ethers-wrapper";
 import { ethers } from "ethers";

@@ -1,4 +1,4 @@
-// Returns a transaction object which can be used to transfer to the passed address
+//* Returns a transaction object which can be used to transfer to the passed address
 // Pass the token Name and Network Name if the transaction is meant to be using a ERC20 token
 
 import { CeloWallet } from "@celo-tools/celo-ethers-wrapper";

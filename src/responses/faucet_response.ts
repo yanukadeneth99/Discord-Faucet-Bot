@@ -108,6 +108,7 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 				if (tokenName == tokens[i].name) {
 					address = tokens[i][networkName];
 					amount = tokens[i].amount;
+					break;
 				}
 			}
 
