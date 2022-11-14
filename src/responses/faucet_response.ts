@@ -77,9 +77,6 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 				usrAddress,
 				networkName
 			)) as ethers.providers.TransactionResponse;
-			logchannel.send(
-				`[TX OBJ - NATIVE]\n${new Date(Date.now()).toUTCString()}\n${JSON.stringify(tx)}`
-			);
 			const string = await getTxName(networkName);
 			const embed = new EmbedBuilder()
 				.setColor("#3BA55C")
@@ -155,9 +152,6 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 				networkName,
 				tokenName
 			)) as ethers.providers.TransactionResponse;
-			logchannel.send(
-				`[TX OBJ - ERC20]\n${new Date(Date.now()).toUTCString()}\n${JSON.stringify(tx)}`
-			);
 			const string = await getTxName(networkName);
 			const embed = new EmbedBuilder()
 				.setColor("#3BA55C")
