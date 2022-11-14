@@ -2,6 +2,10 @@
 
 This is a Discord Bot that dispenses Testnet ETH written in TypeScript.
 
+![CodeSample1](https://i.imgur.com/AYpndSV.png)
+
+![CodeSample2](https://i.imgur.com/ll8qLX7.png)
+
 ## Setup
 
 Change the `example.config.json` into `config.json`, and fill in the required fields.
@@ -79,6 +83,7 @@ This sets the BOT to use memory - KeyV. Use this if you want to just use the BOT
 -   [x] Get the Bot Working
 -   [x] Convert to TypeScript
 -   [x] Migrate to Postgres DB
+-   [ ] Beautify the code more
 -   [ ] Feature - Only Transferring if the user's account has low ETH
 
 ## Inspired by
