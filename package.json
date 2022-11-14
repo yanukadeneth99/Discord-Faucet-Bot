@@ -1,22 +1,52 @@
 {
-  "name": "discord-faucet-bot",
-  "version": "1.0.0",
-  "description": "Discord Faucet Bot to let people collect testnet currency tokens.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev_local": "set NODE_ENV=development && nodemon index.js",
-    "dev": "NODE_ENV=development node index.js",
-    "prod": "NODE_ENV=production node index.js"
-  },
-  "author": "Yanuka Deneth",
-  "license": "MIT",
-  "dependencies": {
-    "@discordjs/rest": "^1.0.1",
-    "discord-api-types": "^0.37.3",
-    "discord.js": "^14.2.0",
-    "dotenv": "^16.0.1",
-    "ethers": "^5.7.0",
-    "keyv": "^4.4.1"
-  }
+	"name": "discord-faucet-bot",
+	"version": "1.0.0",
+	"description": "Discord Faucet Bot to let people request for Testnet tokens",
+	"main": "index.js",
+	"engines": {
+		"node": ">=16.9.0"
+	},
+	"scripts": {
+		"lint": "eslint . --cache --ext .js,.jsx,.ts,.tsx",
+		"lint:fix": "eslint . --fix --cache --ext .js,.jsx,.ts,.tsx",
+		"format": "prettier --check .",
+		"format:fix": "prettier --write .",
+		"start": "ts-node src/index.ts",
+		"start:dev": "ts-node-dev src/index.ts",
+		"start:prod": "tsc && node dist/deploy-commands.js && node dist/index.js",
+		"build": "tsc",
+		"bot:addcommands": "ts-node src/deploy-commands.ts",
+		"bot:deletecommands": "ts-node src/delete-commands.ts"
+	},
+	"author": "Yanuka Deneth",
+	"license": "MIT",
+	"keywords": [
+		"faucet",
+		"bot",
+		"learnweb3dao",
+		"learnweb3"
+	],
+	"dependencies": {
+		"@celo-tools/celo-ethers-wrapper": "^0.3.0",
+		"@discordjs/rest": "^1.3.0",
+		"discord-api-types": "^0.37.17",
+		"discord.js": "^14.6.0",
+		"dotenv": "^16.0.3",
+		"ethers": "^5.7.2",
+		"keyv": "^4.5.2"
+	},
+	"devDependencies": {
+		"@types/glob": "^8.0.0",
+		"@types/node": "^18.11.9",
+		"@typescript-eslint/eslint-plugin": "^5.42.1",
+		"@typescript-eslint/parser": "^5.42.1",
+		"eslint": "^8.27.0",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-unicorn": "^44.0.2",
+		"prettier": "^2.7.1",
+		"ts-node": "^10.9.1",
+		"ts-node-dev": "^2.0.0",
+		"tslib": "^2.4.1",
+		"typescript": "^4.8.4"
+	}
 }
