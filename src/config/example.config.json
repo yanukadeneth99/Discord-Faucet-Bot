@@ -13,17 +13,20 @@
 		{
 			"name": "goerli",
 			"nativeCurrency": "eth",
-			"ALCHEMY_URL": "https://rpc-url/xxxx"
+			"ALCHEMY_URL": "https://rpc-url/xxxx",
+			"scan": "https://goerli.etherscan.io/tx/"
 		},
 		{
 			"name": "alfajores",
 			"nativeCurrency": "celo",
-			"ALCHEMY_URL": "https://rpc-url/xxxx"
+			"RPC_URL": "https://rpc-url/xxxx",
+			"scan": "https://alfajores.celoscan.io/tx/"
 		},
 		{
 			"name": "mumbai",
 			"nativeCurrency": "matic",
-			"ALCHEMY_URL": "https://rpc-url/xxxx"
+			"ALCHEMY_URL": "",
+			"scan": "https://mumbai.polygonscan.com/tx/"
 		}
 	],
 	"tokens": [
@@ -42,9 +45,5 @@
 		"coolDownTime": 120000,
 		"feedbackCoolDown": 200000,
 		"globalCoolDown": 60000
-	},
-	"secrets": {
-		"walletPrivateKey": "xxxxxxxxx",
-		"BotToken": "xxxxxx"
 	}
 }
