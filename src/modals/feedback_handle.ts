@@ -1,11 +1,17 @@
 // Used in InteractionCreate.js to handle Feedback submission
 // Data from the modal is printed in the feedback channel
 
+import { ModalSubmitInteraction, TextChannel } from "discord.js";
+
+import { ExtendedClient } from "../classes/ExtendedClient";
 import { channels } from "../config/config.json";
 
-module.exports = async (client, interaction): Promise<void> => {
+module.exports = async (
+	client: ExtendedClient,
+	interaction: ModalSubmitInteraction
+): Promise<void> => {
 	// Get the Feedback Channel
-	const fdChannel = await client.channels.cache.get(channels.feedback);
+	const fdChannel = client.channels.cache.get(channels.feedback) as TextChannel;
 
 	// Get the value of the modal interactions
 	const subject = interaction.fields.getTextInputValue("subject");

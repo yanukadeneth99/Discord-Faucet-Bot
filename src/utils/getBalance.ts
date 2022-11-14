@@ -6,16 +6,22 @@ import { ethers } from "ethers";
 import { stats, tokens } from "../config/config.json";
 import erc20ABI from "../libs/erc20.json";
 
-// TODO :  Specify the actual value than any
-
 module.exports = async (
 	provider: ethers.providers.JsonRpcProvider,
-	tokenName?: any,
-	networkName?: any
+	tokenName?: string,
+	networkName?: string
 ): Promise<string> => {
 	//* Token Balance (ERC20)
 	if (tokenName && networkName) {
-		const address = tokens[tokenName][networkName];
+		let address: string;
+
+		// Loop until the correct address is found
+		for (let i = 0; i < tokens.length; i++) {
+			if (tokenName == tokens[i].name) {
+				address = tokens[i][networkName];
+				break;
+			}
+		}
 		if (!address) throw Error("Token Address not found!");
 
 		const contract = new ethers.Contract(address, erc20ABI, provider);
