@@ -1,18 +1,20 @@
 //* Handles all kinds of interactions
 // Add all new commands build to here
 
-import { InteractionType } from "discord.js";
+import { Interaction, InteractionType, TextChannel } from "discord.js";
+import Keyv from "keyv";
 
+import { ExtendedClient } from "../classes/ExtendedClient";
 import { channels } from "../config/config.json";
 
 const feedback_handle = require("../modals/feedback_handle");
 
 module.exports = {
 	name: "interactionCreate",
-	async execute(keyv: any, client: any, interaction: any) {
+	async execute(keyv: Keyv, client: ExtendedClient, interaction: Interaction) {
 		try {
-			// Get the Log Channel
-			const errorchannel = await client.channels.cache.get(channels.error);
+			// Gets the Log Channel
+			const errorchannel = client.channels.cache.get(channels.error) as TextChannel;
 
 			//* Chat Command Interactions
 			if (interaction.isChatInputCommand()) {
@@ -86,11 +88,15 @@ module.exports = {
 			}
 			//* Different kind of interaction
 			else {
-				console.log(`Different kind of interaction : ${interaction}`);
+				errorchannel.send(
+					`[ERROR]\n${new Date(
+						Date.now()
+					).toUTCString()}\nDifferent Kind of Interaction\n${interaction}`
+				);
 				return;
 			}
 		} catch (error) {
-			const errorchannel = await client.channels.cache.get(channels.error);
+			const errorchannel = client.channels.cache.get(channels.error) as TextChannel;
 			console.error(`Error Handling Interaction : ${error}`);
 			errorchannel.send(
 				`[ERROR]\n${new Date(Date.now()).toUTCString()}\nInteraction Handling\n${error}`

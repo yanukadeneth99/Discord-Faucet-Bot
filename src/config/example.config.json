@@ -9,28 +9,31 @@
 		"error": "0000000000000"
 	},
 	"bypassRoles": ["0000000000000"],
-	"networks": {
-		"goerli": {
+	"networks": [
+		{
+			"name": "goerli",
 			"nativeCurrency": "eth",
-			"ALCHEMY_URL": "https://eth-goerli.g.alchemy.com/v2/xxxxxxxxxxxx"
+			"ALCHEMY_URL": "https://rpc-url/xxxx"
 		},
-		"rinkeby": {
-			"nativeCurrency": "eth",
-			"ALCHEMY_URL": "https://eth-rinkeby.alchemyapi.io/v2/xxxxxxxxxxx"
+		{
+			"name": "alfajores",
+			"nativeCurrency": "celo",
+			"ALCHEMY_URL": "https://rpc-url/xxxx"
 		},
-		"mumbai": {
+		{
+			"name": "mumbai",
 			"nativeCurrency": "matic",
-			"ALCHEMY_URL": "https://polygon-mumbai.g.alchemy.com/v2/xxxxxxxxx"
+			"ALCHEMY_URL": "https://rpc-url/xxxx"
 		}
-	},
-	"tokens": {
-		"link": {
+	],
+	"tokens": [
+		{
+			"name": "link",
 			"amount": 10,
 			"goerli": "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
-			"rinkeby": "0x01BE23585060835E02B77ef475b0Cc51aA1e0709",
 			"mumbai": "0x326C977E6efc84E512bB9C30f76E30c160eD06FB"
 		}
-	},
+	],
 	"stats": {
 		"walletAddress": "xxxxxxxx",
 		"dailyEth": 1,
