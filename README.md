@@ -17,9 +17,9 @@ DB_PASSWORD="<password>"
 
 ## Installation
 
-1. If you do not have pnpm, run `npm i -g pnpm`, also install nodemon if you haven't `npm i -g nodemon`
+1. If you do not have pnpm, run `npm i -g pnpm`.
 2. Install Dependancies using `pnpm install`
-3. Fill in the config and run the bot : `pnpm dev_local`
+3. Fill in the config and run the bot : `pnpm start:dev`
 
 ## Networks
 
