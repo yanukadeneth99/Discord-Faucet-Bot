@@ -51,6 +51,22 @@ Adding Networks or Tokens are fairly straighforward.
 3. That's literally it!
 4. Make sure to do a PR into the Main Repo! (Edit the `example.config.json`)
 
+## Database
+
+This BOT currently has two modes it can run, `KeyV - Memory` and `Postgres - Storage`. You can change the mode by changing the `database` value in the `stats` field of `config.json`
+
+```json
+"database": "pg",
+```
+
+This sets the BOT to use storage - Postgres DB. **Make sure you setup the necessary paramters**
+
+```json
+"database": "keyv",
+```
+
+This sets the BOT to use memory - KeyV. Use this if you want to just use the BOT without having to configure Databases.
+
 ## Adding Features
 
 1. Fork the project
@@ -62,7 +78,8 @@ Adding Networks or Tokens are fairly straighforward.
 
 -   [x] Get the Bot Working
 -   [x] Convert to TypeScript
--   [ ] Migrate to Postgres DB
+-   [x] Migrate to Postgres DB
+-   [ ] Feature - Only Transferring if the user's account has low ETH
 
 ## Inspired by
 
