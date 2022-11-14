@@ -19,13 +19,13 @@
 		{
 			"name": "alfajores",
 			"nativeCurrency": "celo",
-			"RPC_URL": "https://rpc-url/xxxx",
+			"RPC_URL": "https://alfajores-forno.celo-testnet.org",
 			"scan": "https://alfajores.celoscan.io/tx/"
 		},
 		{
 			"name": "mumbai",
 			"nativeCurrency": "matic",
-			"ALCHEMY_URL": "",
+			"ALCHEMY_URL": "https://rpc-url/xxxx",
 			"scan": "https://mumbai.polygonscan.com/tx/"
 		}
 	],
