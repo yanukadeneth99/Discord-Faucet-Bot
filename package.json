@@ -1,8 +1,9 @@
 {
 	"name": "discord-faucet-bot",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"description": "Discord Faucet Bot to let people request for Testnet tokens",
 	"main": "index.js",
+	"author": "Yanuka Deneth",
 	"engines": {
 		"node": ">=16.9.0"
 	},
@@ -18,7 +19,15 @@
 		"bot:addcommands": "ts-node src/deploy-commands.ts",
 		"bot:deletecommands": "ts-node src/delete-commands.ts"
 	},
-	"author": "Yanuka Deneth",
+	"repository": {
+    "type": "git",
+    "url": "git+https://github.com/yanukadeneth99/Discord-Faucet-Bot.git"
+  },
+	"bugs": {
+    "url": "https://github.com/yanukadeneth99/Discord-Faucet-Bot/issues"
+  },
+  "homepage": "https://github.com/yanukadeneth99/Discord-Faucet-Bot#readme",
+
 	"license": "MIT",
 	"keywords": [
 		"faucet",
