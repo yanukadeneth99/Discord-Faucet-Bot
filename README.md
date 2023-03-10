@@ -94,6 +94,7 @@ This sets the BOT to use memory - KeyV. Use this if you want to just use the BOT
 -   [x] Convert to TypeScript
 -   [x] Migrate to Postgres DB
 -   [ ] Beautify the code more
+-   [ ] Add Support for Sepolia
 -   [ ] Feature - Only Transferring if the user's account has low ETH
 
 ## Inspired by
