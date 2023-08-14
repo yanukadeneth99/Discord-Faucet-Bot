@@ -12,8 +12,12 @@ module.exports = async (networkName: string): Promise<ethers.providers.JsonRpcPr
 
 	// Loop Over Every Network until the correct network is found
 	for (let i = 0; i < networks.length; i++) {
+		console.log('Config Networks: %s', networks[i].name);
+		console.log('Command Network: %s', networkName);
 		if (networks[i].name == networkName) {
-			networkRPC = networks[i].ALCHEMY_URL ?? networks[i].RPC_URL;
+			//networkRPC = networks[i].ALCHEMY_URL ?? networks[i].RPC_URL;
+			networkRPC = networks[i].RPC_URL;
+			console.log('RPC URL: %s', networks[i].RPC_URL);
 			break;
 		}
 	}
@@ -28,6 +32,7 @@ module.exports = async (networkName: string): Promise<ethers.providers.JsonRpcPr
 		return provider;
 	}
 	const provider = new ethers.providers.JsonRpcProvider(networkRPC);
+	console.log('Utils/getProvider requesting Provider: %s', networkRPC)
 	await provider.ready;
 	return provider;
 };

@@ -11,7 +11,7 @@ import { networks, tokens } from "../config/config.json";
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("faucet")
-		.setDescription("Claim daily ETH from the faucet")
+		.setDescription("Claim monthly L1 from the faucet")
 		.setDMPermission(false)
 		.setDefaultMemberPermissions(PermissionFlagsBits.SendMessages)
 		.addStringOption(option =>
@@ -31,7 +31,7 @@ module.exports = {
 			});
 			return option;
 		})
-		.addStringOption(option => {
+		/*.addStringOption(option => {
 			option
 				.setName("token")
 				.setDescription("Select the token if applicable")
@@ -44,5 +44,5 @@ module.exports = {
 				});
 			});
 			return option;
-		}),
+		})*/,
 };

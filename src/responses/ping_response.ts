@@ -9,6 +9,7 @@ module.exports = async (interaction: CommandInteraction): Promise<void> => {
 	const sent = await interaction.reply({
 		content: "✈️ Pinging...",
 		fetchReply: true,
+		ephemeral: true, 
 	});
 
 	try {

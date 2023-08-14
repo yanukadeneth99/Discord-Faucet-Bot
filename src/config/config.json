@@ -1,0 +1,36 @@
+{
+	"bot": {
+		"clientId": "1139753542995947640",
+		"guildId": "1115680289293873243"
+	},
+	"channels": {
+		"feedback": "1139751962632519731",
+		"log": "1139751978101112872",
+		"error": "1139752072590413934"
+	},
+	"bypassRoles": ["0000000000000"],
+	"networks": [
+		{
+			"name": "lamina1 c-chain",
+			"nativeCurrency": "L1",
+			"RPC_URL": "http://127.0.0.1:9650/ext/bc/C/rpc",
+			"scan": "https://explorer.lamina1.com/tx/"
+		}
+	],
+	"tokens": [
+	],
+	"stats": {
+		"walletAddress": "0xF1857091Ae797f2aA4FfCFdf7375de523586E658",
+		"dailyEth": 0.01,
+		"database": "faucetdb1",
+		"maxFee": 95000000000,
+		"coolDownTime": 1000,
+		"feedbackCoolDown": 3000,
+		"globalCoolDown": 4000
+	},
+	"database": {
+		"host": "localhost",
+		"port": 5432,
+		"database": "faucetdb1"
+	}
+}

@@ -14,12 +14,12 @@ const transfer = require("../utils/transfer");
 
 module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): Promise<void> => {
 	// Initial Responce to client
-	await interaction.reply({ content: "🤖 Mining....", fetchReply: true });
+	await interaction.reply({ content: "🤖 Connecting....", fetchReply: true, ephemeral: true});
 
 	try {
 		// Setup the log channel
 		const logchannel = interaction.client.channels.cache.get(channels.log) as TextChannel;
-
+		
 		// Get the Network,token and address from user input
 		const usrAddress = interaction.options.getString("address");
 		const networkName = interaction.options.getString("network");
@@ -32,15 +32,18 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 		}
 
 		// Get the Provider based on the network
+		console.log('Request provider: %s', networkName);
 		const provider = (await getProvider(networkName)) as ethers.providers.JsonRpcProvider;
+		console.log('Returned provider: %s'), provider;
 
 		//* Native Transfer (No Token)
 		if (!tokenName) {
 			// If the balance is too low (curBalance is string)
+			console.log('Begin native token transfer')
 			const curBalance = (await getBalance(provider)) as string;
 			if (parseFloat(curBalance) < stats.dailyEth) {
 				await interaction.editReply(
-					`😥 Insufficient funds, please donate to : ${stats.walletAddress}`
+					`😥 Insufficient funds, tell admin to fill : ${stats.walletAddress}`
 				);
 				return;
 			}
@@ -54,7 +57,7 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 					(stats.globalCoolDown - (Date.now() - nonceLimit)) / 1000
 				);
 				await interaction.editReply(
-					`🥶 Please wait for ${timeLeft} seconds before requesting`
+					`🔥 Faucet receiving heavy traffic, please wait ${timeLeft} seconds before requesting`
 				);
 				return;
 			}
@@ -65,7 +68,7 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 				| undefined;
 			if (limit) {
 				const timeLeft = Math.floor((stats.coolDownTime - (Date.now() - limit)) / 1000);
-				await interaction.editReply(`😎 Cool people waits for ${timeLeft} seconds`);
+				await interaction.editReply(`⏳ Faucet drips weekly, please wait ${timeLeft} seconds`);
 				return;
 			} else {
 				await setTimer(interaction, networkName, true, keyv);
@@ -128,7 +131,7 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 					(stats.globalCoolDown - (Date.now() - nonceLimit)) / 1000
 				);
 				await interaction.editReply(
-					`🥶 Please wait for ${timeLeft} seconds before requesting`
+					`🔥 Faucet receiving heavy traffic, please wait ${timeLeft} seconds before requesting`
 				);
 				return;
 			}
@@ -139,7 +142,7 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 				| undefined;
 			if (limit) {
 				const timeLeft = Math.floor((stats.coolDownTime - (Date.now() - limit)) / 1000);
-				await interaction.editReply(`😎 Cool people waits for ${timeLeft} seconds`);
+				await interaction.editReply(`⏳ Faucet drips weekly, please wait ${timeLeft} seconds`);
 				return;
 			} else {
 				await setTimer(interaction, tokenName, true, keyv);
@@ -182,7 +185,7 @@ module.exports = async (keyv: Keyv, interaction: ChatInputCommandInteraction): P
 				}\nTo : ${usrAddress}`
 			);
 		}
-		await interaction.editReply("💁 Transfer Successful, Happy Coding!");
+		await interaction.editReply("🙌 Transfer Successful!");
 	} catch (error) {
 		console.error(`Error Transferring : ${error}`);
 		const errorchannel = interaction.client.channels.cache.get(channels.error) as TextChannel;

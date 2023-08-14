@@ -22,8 +22,6 @@ module.exports = {
 					require("../responses/info_response")(interaction);
 				} else if (interaction.commandName === "ping") {
 					require("../responses/ping_response")(interaction);
-				} else if (interaction.commandName === "feedback") {
-					require("../responses/feedback_response")(keyv, interaction);
 				} else if (interaction.commandName === "balance") {
 					require("../responses/balance_response")(interaction);
 				} else if (interaction.commandName === "faucet") {

@@ -10,7 +10,7 @@ const getProvider = require("../utils/getProvider");
 
 module.exports = async (interaction: ChatInputCommandInteraction): Promise<void> => {
 	// Initial Responce to client
-	await interaction.reply({ content: "👩‍💻 Calculating....", fetchReply: true });
+	await interaction.reply({ content: "👩‍💻 Calculating....", ephemeral: true, fetchReply: true });
 
 	try {
 		let balance: string; // Holds the final balance (string)

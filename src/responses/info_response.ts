@@ -9,6 +9,7 @@ module.exports = async (interaction: ChatInputCommandInteraction): Promise<void>
 	await interaction.reply({
 		content: "🏃 Getting...",
 		fetchReply: true,
+		ephemeral: true, 
 	});
 	try {
 		if (interaction.options.getSubcommand() === "user") {
